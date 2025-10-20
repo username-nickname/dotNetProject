@@ -2,7 +2,7 @@
 
 Нужно восстановить зависимости и накатить базу данных, так как весь код и миграции уже лежат в репозитории.
 
-1) https://github.com/username-nickname/dotNetProject.git
+1) git clone https://github.com/username-nickname/dotNetProject.git
 2) dotnet tool install --global dotnet-ef
 3) dotnet ef database update --project Infrastructure --startup-project Project.Api
 4) dotnet run --project Project.Api
