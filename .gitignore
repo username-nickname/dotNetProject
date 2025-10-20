@@ -1,0 +1,7 @@
+[Bb]in/
+[Oo]bj/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+*.sln.DotSettings.user
