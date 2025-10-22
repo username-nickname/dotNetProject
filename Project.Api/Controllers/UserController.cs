@@ -22,7 +22,6 @@ public class UserController : ApiControllerBase
     }
     
     [HttpGet("{userId}")] // api/user/1
-    // [Authorize(Roles = "Student")]
     [RoleAuthorize(RoleType.Student)]
     public async Task<IActionResult> GetUserById(int userId)
     {

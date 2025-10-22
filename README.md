@@ -46,7 +46,7 @@
 
 1) Публичные: [AllowAnonymous] (например, /api/login, /api/register).
 2) Защищенные: [Authorize] (требует любой валидный токен).
-3) С Проверкой роли: [Authorize(Roles="Admin")] (требует токен с клеймом Role: Admin)
+3) С Проверкой роли: [RoleAuthorize(RoleType.Student)] (требует токен с клеймом Role: Admin)
 
 
 ## API Endpoints
