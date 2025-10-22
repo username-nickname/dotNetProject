@@ -24,8 +24,9 @@ public class AppDbContext : DbContext
             entity.Property(r => r.Name).IsRequired().HasMaxLength(50);
 
             entity.HasData(
-                new Role((int)RoleType.Admin, RoleType.Admin.ToString()), 
-                new Role((int)RoleType.User, RoleType.User.ToString())
+                new Role((int)RoleType.Student, RoleType.Student.ToString()), 
+                new Role((int)RoleType.Teacher, RoleType.Teacher.ToString()),
+                new Role((int)RoleType.HeadOfDepartment, RoleType.HeadOfDepartment.ToString())
             );
         });
 

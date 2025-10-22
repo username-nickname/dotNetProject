@@ -57,8 +57,9 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Admin" },
-                    { 2, "User" }
+                    { 1, "Student" },
+                    { 2, "Teacher" },
+                    { 3, "HeadOfDepartment" }
                 });
 
             migrationBuilder.CreateIndex(

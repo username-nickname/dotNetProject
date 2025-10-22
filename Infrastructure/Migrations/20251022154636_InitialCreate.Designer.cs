@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251020152843_InitialCreate")]
+    [Migration("20251022154636_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -46,12 +46,17 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Admin"
+                            Name = "Student"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "User"
+                            Name = "Teacher"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "HeadOfDepartment"
                         });
                 });
 

@@ -29,24 +29,13 @@ public class AuthController : ApiControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> LoginUser([FromBody] LoginUserDto dto)
     {
-        try
-        {
-            var token= await _authService.Login(dto);
+        var token= await _authService.Login(dto);
             
-            if (token == null)
-            {
-                return Unauthorized(new { message = "Incorrect Email or Password." });
-            }
+        if (token == null)
+        {
+            return Unauthorized(new { message = "Incorrect Email or Password." });
+        }
 
-            return OkDataResponse(new { token = token });
-        }
-        catch (ValidationException ex)
-        {
-            return BadRequest(ex.Errors.Select(e => new { Field = e.PropertyName, Message = e.ErrorMessage }));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "An unexpected error occurred.", data = ex.Message });
-        }
+        return OkDataResponse(new { token = token });
     }
 }

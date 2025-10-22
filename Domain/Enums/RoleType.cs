@@ -2,6 +2,7 @@ namespace Domain.Enums;
 
 public enum RoleType
 {
-    Admin = 1,
-    User = 2
+    Student = 1,
+    Teacher = 2,
+    HeadOfDepartment = 3
 }
