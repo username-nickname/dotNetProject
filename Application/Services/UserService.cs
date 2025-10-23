@@ -9,19 +9,16 @@ using Interfaces;
 
 public class UserService : IUserService
 {
-    private readonly IValidator<UpdateUserDto> _updateValidator;
     private readonly IValidator<ChangePasswordDto> _changePasswordValidator;
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher _passwordHasher;
     
     public UserService(
-        IValidator<UpdateUserDto> updateValidator,
         IValidator<ChangePasswordDto> changePasswordValidator,
         IUserRepository userRepository,
         IPasswordHasher passwordHasher
         )
     {
-        _updateValidator = updateValidator;
         _changePasswordValidator = changePasswordValidator;
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
@@ -40,36 +37,9 @@ public class UserService : IUserService
         {
             Id = userEntity.Id,
             Email = userEntity.Email,
-            Name = userEntity.Name,
-            LastName = userEntity.LastName,
         };
     
         return responseDto;
-    }
-    
-    public async Task UpdateUser(UpdateUserDto dto, int userId)
-    {
-        var user = await _userRepository.GetById(userId);
-        if (user == null) throw new UserNotFoundException(userId);
-
-        var validationResult = _updateValidator.Validate(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
-        
-        if (!string.IsNullOrEmpty(dto.Name))
-        {
-            user.UpdateName(dto.Name); 
-        }
-        
-        if (!string.IsNullOrEmpty(dto.LastName))
-        {
-            user.UpdateLastName(dto.LastName); 
-        }
-
-        await _userRepository.SaveChanges();
     }
 
     public async Task ChangePassword(ChangePasswordDto dto, int userId)
@@ -97,7 +67,7 @@ public class UserService : IUserService
         bool isOldPasswordCorrect = await Task.Run(() => 
             _passwordHasher.VerifyPassword(dto.OldPassword, originPasswordHash)
         ); 
-
+    
         if (!isOldPasswordCorrect)
         {
             throw new InvalidPasswordException("The current password is incorrect."); 

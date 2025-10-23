@@ -30,21 +30,6 @@ public class UserController : ApiControllerBase
         return OkDataResponse(userDto);
     }
 
-    [HttpPatch("update")]
-    [Authorize]
-    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto dto)
-    {
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
-        if (string.IsNullOrEmpty(userIdString)) return Unauthorized();
-    
-        var userId = int.Parse(userIdString);
-            
-        await _userService.UpdateUser(dto, userId);
-
-        return OkResponse("User updated successfully");
-    }
-
     [HttpPost("change-password")]
     [Authorize]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto)

@@ -36,6 +36,11 @@ public class ApiExceptionFilter : ExceptionFilterAttribute
                 message = exception.Message;
                 break;
 
+            case DepartmentNotFoundException:
+                statusCode = StatusCodes.Status404NotFound;
+                message = exception.Message;
+                break;
+            
             default:
                 statusCode = StatusCodes.Status500InternalServerError;
                 message = "Непередбачена помилка сервера.";

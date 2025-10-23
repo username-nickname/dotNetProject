@@ -33,7 +33,6 @@ public class UserRepository : IUserRepository
     public async Task Add(User user)
     {
         await _context.Users.AddAsync(user);
-        await _context.SaveChangesAsync();
     }
 
     public async Task<int> GetTokenVersion(int userId)

@@ -41,7 +41,6 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginUserDtoValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UpdateUserDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ChangePasswordDtoValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
