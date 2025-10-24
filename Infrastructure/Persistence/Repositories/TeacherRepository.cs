@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Repositories;
 
@@ -15,5 +16,17 @@ public class TeacherRepository : ITeacherRepository
     public async Task Add(Teacher teacher)
     {
         await _context.Teachers.AddAsync(teacher);
+    }
+
+    public async Task<Teacher?> GetByUserId(int id)
+    {
+        return await _context.Teachers
+            .Where(t => t.UserId == id)
+            .FirstOrDefaultAsync();
+    }
+    
+    public async Task<bool> ExistsById(int id)
+    {
+        return await _context.Teachers.AnyAsync(u => u.Id == id);
     }
 }

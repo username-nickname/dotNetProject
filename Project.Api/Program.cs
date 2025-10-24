@@ -5,6 +5,8 @@ using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Application.Validation.Grade;
+using Application.Validation.Student;
 using Microsoft.AspNetCore.Mvc;
 using Project.Api.Filters;
 using Project.Api.Middleware;
@@ -42,6 +44,11 @@ builder.Services.AddAuthorization();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginUserDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ChangePasswordDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AssignSubjectStudentDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AddGradeDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateGradeDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetGradesQueryDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CalculateStudentGpaQueryDtoValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 

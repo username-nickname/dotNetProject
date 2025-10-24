@@ -6,13 +6,13 @@ public class Teacher : IAuditableEntity
 {
     public int Id { get; private set; }
     public string FullName { get; private set; } = null!;
-    public int DepartmentId { get; private set; } // Кафедра
+    public int DepartmentId { get; private set; }
     public Department Department { get; private set; } = null!; 
     
-    public int PositionId { get; private set; } // посада
+    public int PositionId { get; private set; }
     public Position Position { get; private set; } = null!;
     
-    public int UserId { get; private set; } // Связь с таблицей пользователей
+    public int UserId { get; private set; }
     public User User { get; private set; } = null!;
     
     public ICollection<TeacherSubject> Subjects { get; private set; } = new List<TeacherSubject>();
@@ -24,7 +24,7 @@ public class Teacher : IAuditableEntity
     
     public static Teacher CreateNew(string fullName, int departmentId, int positionId, int userId)
     {
-        // TODO: (Валідація як в User.cs)
+        ValidateRequiredString(fullName, nameof(fullName));
         return new Teacher
         {
             FullName = fullName, 
@@ -34,5 +34,11 @@ public class Teacher : IAuditableEntity
         };
     }
     
-    // TODO: Реализовать методы для работы с свойствами (Напр. Добавить новый предмет, который ведет преподователь)
+    private static void ValidateRequiredString(string value, string argumentName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException($"Поле '{argumentName}' не може бути порожнім.", argumentName);
+        }
+    }
 }

@@ -3,7 +3,6 @@ namespace Project.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Application.DTO.Auth;
 using Application.Interfaces.Services;
-using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 
 [ApiController]

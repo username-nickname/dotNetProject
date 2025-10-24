@@ -2,8 +2,8 @@ namespace Domain.Exceptions;
 
 public class UserNotFoundException : Exception
 {
-    public UserNotFoundException(int userId)
-        : base($"Користувача з ID {userId} не знайдено.")
+    public UserNotFoundException(string message = "Користувача не знайдено")
+        : base(message)
     {
     }
 }

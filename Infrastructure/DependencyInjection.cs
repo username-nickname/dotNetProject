@@ -4,6 +4,7 @@ using Infrastructure.Persistence.Repositories;
 using Infrastructure.Security;
 using Application.Interfaces;
 using Application.Interfaces.Services;
+using Application.Logic.Converters;
 using Application.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,13 +25,19 @@ public static class DependencyInjection
         services.AddScoped<IPositionRepository, PositionRepository>();
         services.AddScoped<ITeacherRepository, TeacherRepository>();
         services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IGradeRepository, GradeRepository>();
+        services.AddScoped<ISubjectRepository, SubjectRepository>();
         
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IStudentService, StudentService>();
+        services.AddScoped<IGradeService, GradeService>();
+        
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IGradeConverter, GradeConverter>();
 
         return services;
     }

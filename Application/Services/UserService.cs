@@ -30,7 +30,7 @@ public class UserService : IUserService
     
         if (userEntity == null)
         {
-            throw new UserNotFoundException(userId);
+            throw new UserNotFoundException();
         }
         
         var responseDto = new UserResponseDto
@@ -45,7 +45,7 @@ public class UserService : IUserService
     public async Task ChangePassword(ChangePasswordDto dto, int userId)
     {
         var user = await _userRepository.GetById(userId);
-        if (user == null) throw new UserNotFoundException(userId);
+        if (user == null) throw new UserNotFoundException();
 
         var validationResult = _changePasswordValidator.Validate(dto);
         

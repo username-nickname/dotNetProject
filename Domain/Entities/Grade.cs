@@ -14,25 +14,33 @@ public class Grade : IAuditableEntity
     public int TeacherId { get; private set; }
     public Teacher Teacher { get; private set; } = null!;
     
-    public int NumericValue { get; private set; } // Числова оцінка
-    public string LetterValue { get; private set; } = null!; // Літерна оцінка (з'явиться пізніше)
+    public int NumericValue { get; private set; }
+    public string LetterValue { get; private set; } = null!;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     
     private Grade() { }
 
-    public static Grade CreateNew(int studentId, int subjectId, int teacherId, int value)
+    public static Grade CreateNew(int studentId, int subjectId, int teacherId, int numericValue, string letterValue)
     {
-        // TODO: (Валідація як в User.cs)
-        
         return new Grade
         {
             StudentId = studentId, 
             SubjectId = subjectId, 
             TeacherId = teacherId, 
-            NumericValue = value,
+            NumericValue = numericValue,
+            LetterValue = letterValue,
         };
     }
     
-    // TODO:Реализовать методы для работы с свойствами (Напр. Добавить изменить оценку)
+    public void UpdateNumericValue(int newValue, string newLetterValue)
+    {
+        if (newValue < 0 || newValue > 100)
+        {
+            throw new ArgumentOutOfRangeException(nameof(newValue), "Оцінка має бути в діапазоні 0-100.");
+        }
+    
+        NumericValue = newValue;
+        LetterValue = newLetterValue;
+    }
 }

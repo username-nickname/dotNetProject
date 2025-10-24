@@ -35,9 +35,24 @@ public class ApiExceptionFilter : ExceptionFilterAttribute
                 statusCode = StatusCodes.Status400BadRequest;
                 message = exception.Message;
                 break;
+            
+            case ArgumentOutOfRangeException:
+                statusCode = StatusCodes.Status400BadRequest;
+                message = exception.Message;
+                break;
 
             case DepartmentNotFoundException:
                 statusCode = StatusCodes.Status404NotFound;
+                message = exception.Message;
+                break;
+            
+            case GradeNotFoundException:
+                statusCode = StatusCodes.Status404NotFound;
+                message = exception.Message;
+                break;
+            
+            case ForbiddenException:
+                statusCode = StatusCodes.Status403Forbidden;
                 message = exception.Message;
                 break;
             

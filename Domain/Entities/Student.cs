@@ -9,7 +9,7 @@ public class Student : IAuditableEntity
     public string Group { get; private set; } = null!;
     public int YearOfEntry { get; private set; }
     
-    public int UserId { get; private set; } // Связь с таблицей пользователей
+    public int UserId { get; private set; }
     public User User { get; private set; } = null!;
     
     public ICollection<StudentSubject> Subjects { get; private set; } = new List<StudentSubject>();
@@ -21,9 +21,26 @@ public class Student : IAuditableEntity
 
     public static Student CreateNew(string fullName, string group, int year, int userId) 
     {
-        // TODO: (Валідація як в User.cs)
+        ValidateRequiredString(fullName, nameof(fullName));
         return new Student { FullName = fullName, Group = group, YearOfEntry = year, UserId = userId };
     }
     
-    // TODO: Реализовать методы для работы с свойствами (Напр. Добавить новый предмет, который изучает студент)
+    public void AssignSubject(int subjectId)
+    {
+        if (Subjects.Any(ss => ss.SubjectId == subjectId))
+        {
+            throw new InvalidOperationException("Предмет вже призначено цьому студенту.");
+        }
+    
+        var studentSubject = new StudentSubject(Id, subjectId); 
+        Subjects.Add(studentSubject);
+    }
+    
+    private static void ValidateRequiredString(string value, string argumentName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException($"Поле '{argumentName}' не може бути порожнім.", argumentName);
+        }
+    }
 }

@@ -1,7 +1,6 @@
-using Domain.Enums;
-
 namespace Project.Api.Controllers;
 
+using Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Application.DTO.User;
 using Application.Interfaces.Services;

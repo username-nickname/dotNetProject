@@ -107,6 +107,24 @@ public class AppDbContext : DbContext
             entity.HasOne(t => t.Position).WithMany().HasForeignKey(t => t.PositionId).OnDelete(DeleteBehavior.Restrict);
 
         });
+
+        // таблиця предметів 
+        modelBuilder.Entity<Subject>(entity =>
+        {
+            entity.ToTable("Subjects");
+            entity.HasKey(u => u.Id);
+            entity.Property(u => u.Name).IsRequired().HasMaxLength(100);
+            entity.Property(u => u.Semester).IsRequired();
+            entity.Property(u => u.Credits).IsRequired();
+            entity.Property(u => u.CreatedAt).IsRequired();
+            entity.Property(u => u.UpdatedAt).IsRequired();
+         
+            entity.HasData(
+                new Subject (1, "Математичний аналіз", 1, 6),
+                new Subject (2, "ООП", 1, 10),
+                new Subject (3, "Розробка програмного забезпечення", 1, 10)
+            );
+        });
         
         // таблиця студентів 
         modelBuilder.Entity<Student>(entity =>
@@ -153,11 +171,11 @@ public class AppDbContext : DbContext
         {
             entity.HasKey(ss => new { ss.TeacherId, ss.SubjectId });
             entity.HasOne(ts => ts.Teacher)
-                .WithMany(t => t.Subjects) // <-- ПРАВИЛЬНО: t - Teacher
+                .WithMany(t => t.Subjects)
                 .HasForeignKey(ts => ts.TeacherId);
 
             entity.HasOne(ts => ts.Subject)
-                .WithMany(s => s.Teachers) // <-- ПРАВИЛЬНО: s - Subject
+                .WithMany(s => s.Teachers)
                 .HasForeignKey(ts => ts.SubjectId); 
         });
     }
