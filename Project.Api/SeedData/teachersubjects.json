@@ -1,0 +1,6 @@
+﻿[
+  { "TeacherId": 1, "SubjectId": 1 },
+  { "TeacherId": 1, "SubjectId": 3 },
+  { "TeacherId": 2, "SubjectId": 2 },
+  { "TeacherId": 2, "SubjectId": 4 }
+]

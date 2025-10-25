@@ -7,9 +7,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Application.Validation.Grade;
 using Application.Validation.Student;
+using Infrastructure.Persistence;
+using Infrastructure.Seeding;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project.Api.Filters;
 using Project.Api.Middleware;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +61,28 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Сід для БД
+// using (var scope = app.Services.CreateScope())
+// {
+//     var services = scope.ServiceProvider;
+//     try
+//     {
+//         var context = services.GetRequiredService<AppDbContext>();
+//         if ((await context.Database.GetPendingMigrationsAsync()).Any())
+//         {
+//             await context.Database.MigrateAsync();
+//         }
+//
+//         var seeder = services.GetRequiredService<DataSeeder>();
+//         await seeder.Seed();
+//     }
+//     catch (Exception ex)
+//     {
+//         var logger = services.GetRequiredService<ILogger<Program>>();
+//         logger.LogError(ex, "Error seeding bd.");
+//     }
+// }
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

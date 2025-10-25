@@ -1,0 +1,6 @@
+﻿[
+  { "StudentId": 1, "SubjectId": 1, "TeacherId": 1, "NumericValue": 95, "LetterValue": "A" },
+  { "StudentId": 1, "SubjectId": 2, "TeacherId": 2, "NumericValue": 88, "LetterValue": "B" },
+  { "StudentId": 2, "SubjectId": 1, "TeacherId": 1, "NumericValue": 75, "LetterValue": "C" },
+  { "StudentId": 2, "SubjectId": 3, "TeacherId": 1, "NumericValue": 92, "LetterValue": "A" }
+]

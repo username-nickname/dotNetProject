@@ -35,19 +35,58 @@ public class GradeRepository : IGradeRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<Grade>> GetGradesByStudentAndSubject(int studentId, int subjectId)
+    public async Task<List<Grade>> GetGradesByStudentAndSubject(int studentId,
+        int subjectId)
     {
         return await _context.Grades
             .Where(g => g.StudentId == studentId && g.SubjectId == subjectId)
             .ToListAsync();
     }
 
-    public async Task<List<Grade>> GetGradesByStudentAndSemester(int studentId, int semester)
+    public async Task<List<Grade>> GetGradesByStudentAndSemester(int studentId,
+        int semester)
     {
         return await _context.Grades
-            .Include(g => g.Subject) 
+            .Include(g => g.Subject)
             .Where(g => g.StudentId == studentId)
-            .Where(g => g.Subject.Semester == semester) 
+            .Where(g => g.Subject.Semester == semester)
+            .ToListAsync();
+    }
+
+    public async Task<List<Grade>> GetGradesByStudentId(int studentId)
+    {
+        return await _context.Grades
+            .Include(g => g.Subject)
+            .Include(g => g.Teacher)
+            .Where(g => g.StudentId == studentId)
+            .ToListAsync();
+    }
+
+    public async Task<List<Grade>> GetGradesByGroupAndSemester(string groupName,
+        int semester)
+    {
+        return await _context.Grades
+            .Include(g => g.Student)
+            .Include(g => g.Subject)
+            .Where(g =>
+                g.Student.Group == groupName && g.Subject.Semester == semester)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Grade>> GetGradesByTeacher(int teacherId)
+    {
+        return await _context.Grades
+            .Include(g => g.Subject)
+            .Where(g => g.TeacherId == teacherId)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Grade>> GetGradesByDepartment(
+        int departmentId)
+    {
+        return await _context.Grades
+            .Include(g => g.Teacher)
+            .Where(g => g.Teacher.DepartmentId == departmentId)
             .ToListAsync();
     }
 

@@ -6,14 +6,22 @@ namespace Infrastructure.Persistence.Repositories;
 public class SubjectRepository : ISubjectRepository
 {
     private readonly AppDbContext _context;
-    
+
     public SubjectRepository(AppDbContext context)
     {
         _context = context;
     }
-    
+
     public async Task<bool> ExistsById(int id)
     {
         return await _context.Subjects.AnyAsync(u => u.Id == id);
+    }
+
+    public async Task<int> CountByDepartment(int departmentId)
+    {
+        return await _context.Subjects
+            .Where(s =>
+                s.Teachers.Any(ts => ts.Teacher.DepartmentId == departmentId))
+            .CountAsync();
     }
 }

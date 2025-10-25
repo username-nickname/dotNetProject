@@ -1,0 +1,4 @@
+﻿[
+  { "Id": 1, "FullName": "Dr. Ivan Petrenko", "DepartmentId": 1, "PositionId": 1, "UserId": 2 },
+  { "Id": 2, "FullName": "Dr. Maria Kovalenko", "DepartmentId": 2, "PositionId": 2, "UserId": 3 }
+]

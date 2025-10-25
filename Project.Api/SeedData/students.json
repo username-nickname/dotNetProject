@@ -1,0 +1,4 @@
+﻿[
+  { "Id": 1, "FullName": "Olena Vasylyna", "Group": "GroupA-23", "YearOfEntry": 2023, "UserId": 4 },
+  { "Id": 2, "FullName": "Mykhailo Ivanov", "Group": "GroupB-22", "YearOfEntry": 2022, "UserId": 5 }
+]

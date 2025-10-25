@@ -7,4 +7,5 @@ public interface ITeacherRepository
     Task Add(Teacher teacher);
     Task<bool> ExistsById(int id);
     Task<Teacher?> GetByUserId(int id);
+    Task<int> CountByDepartment(int departmentId);
 }

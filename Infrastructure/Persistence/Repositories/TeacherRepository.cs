@@ -29,4 +29,10 @@ public class TeacherRepository : ITeacherRepository
     {
         return await _context.Teachers.AnyAsync(u => u.Id == id);
     }
+    
+    public async Task<int> CountByDepartment(int departmentId)
+    {
+        return await _context.Teachers
+            .CountAsync(t => t.DepartmentId == departmentId);
+    }
 }

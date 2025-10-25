@@ -11,4 +11,8 @@ public interface IGradeRepository
     Task SaveChangesAsync();
     Task<List<Grade>> GetGradesByStudentAndSubject(int studentId, int subjectId);
     Task<List<Grade>> GetGradesByStudentAndSemester(int studentId, int semester);
+    Task<List<Grade>> GetGradesByStudentId(int studentId);
+    Task<List<Grade>> GetGradesByGroupAndSemester(string groupName, int semester);
+    Task<IEnumerable<Grade>> GetGradesByTeacher(int teacherId);
+    Task<IEnumerable<Grade>> GetGradesByDepartment(int departmentId);
 }

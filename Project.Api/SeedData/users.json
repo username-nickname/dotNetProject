@@ -1,0 +1,7 @@
+﻿[
+  { "Id": 1, "RoleId": 1, "Email": "admin@test.com", "Password": "password" },
+  { "Id": 2, "RoleId": 2, "Email": "ivan.petrenko@test.com", "Password": "password" },
+  { "Id": 3, "RoleId": 2, "Email": "maria.kovalenko@test.com", "Password": "password" },
+  { "Id": 4, "RoleId": 3, "Email": "olena.v@test.com", "Password": "password" },
+  { "Id": 5, "RoleId": 3, "Email": "mykhailo.i@test.com", "Password": "password" }
+]

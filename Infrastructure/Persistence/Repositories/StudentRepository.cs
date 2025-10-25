@@ -23,9 +23,32 @@ public class StudentRepository : IStudentRepository
         return await _context.Students.FindAsync(id);
     }
 
+    public async Task<Student?> GetStudentWithDetails(int id)
+    {
+        return await _context.Students
+            .Include(s => s.User)
+            .Include(s => s.Subjects)
+            .ThenInclude(ss => ss.Subject)
+            .ThenInclude(sub => sub.Teachers)
+            .FirstOrDefaultAsync(s => s.Id == id);
+    }
+
+    public async Task<IEnumerable<Student>> GetByGroup(
+        string groupName)
+    {
+        return await _context.Students
+            .Where(s => s.Group == groupName)
+            .ToListAsync();
+    }
+
     public async Task<bool> ExistsById(int id)
     {
         return await _context.Students.AnyAsync(u => u.Id == id);
+    }
+
+    public async Task<bool> GroupExistsByName(string groupName)
+    {
+        return await _context.Students.AnyAsync(s => s.Group == groupName);
     }
 
     public async Task SaveChangesAsync()
@@ -35,7 +58,8 @@ public class StudentRepository : IStudentRepository
 
     public async Task<bool> HasSubject(int studentId, int subjectId)
     {
-        return await _context.StudentSubjects.AnyAsync(ss => ss.StudentId == studentId && ss.SubjectId == subjectId);
+        return await _context.StudentSubjects.AnyAsync(ss =>
+            ss.StudentId == studentId && ss.SubjectId == subjectId);
     }
 
     public async Task<Student?> GetByIdWithSubjects(int studentId)
@@ -46,5 +70,16 @@ public class StudentRepository : IStudentRepository
             .FirstOrDefaultAsync(s => s.Id == studentId);
 
         return student;
+    }
+    
+    
+
+    public async Task<int> CountByDepartment(int departmentId)
+    {
+        return await _context.Students
+            .Where(s => _context.Grades.Any(g =>
+                g.StudentId == s.Id &&
+                g.Teacher.DepartmentId == departmentId))
+            .CountAsync();
     }
 }

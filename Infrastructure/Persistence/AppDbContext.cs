@@ -23,6 +23,19 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        
+        // !Не дає EF видавати Id полям самому. 
+        // !НЕ ВАРТО СТВОРЮВАТИ ДАНІ ТЕПЕР ВРУЧНУ. ХЗ ЩО БУДЕ
+        // Це тільки для сіда. 
+        // TODO: Видалити перед фіналом.
+        modelBuilder.Entity<Role>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Position>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Subject>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<User>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Department>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Teacher>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Student>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder.Entity<Grade>().Property(e => e.Id).ValueGeneratedNever();
 
         // таблиця ролей
         modelBuilder.Entity<Role>(entity =>
@@ -31,11 +44,12 @@ public class AppDbContext : DbContext
             entity.HasKey(r => r.Id);
             entity.Property(r => r.Name).IsRequired().HasMaxLength(50);
 
-            entity.HasData(
-                new Role((int)RoleType.Student, RoleType.Student.ToString()), 
-                new Role((int)RoleType.Teacher, RoleType.Teacher.ToString()),
-                new Role((int)RoleType.HeadOfDepartment, RoleType.HeadOfDepartment.ToString())
-            );
+            // ХЗ що це робить, прибрав поки, може дарма
+            // entity.HasData(
+            //     new Role((int)RoleType.Student, RoleType.Student.ToString()), 
+            //     new Role((int)RoleType.Teacher, RoleType.Teacher.ToString()),
+            //     new Role((int)RoleType.HeadOfDepartment, RoleType.HeadOfDepartment.ToString())
+            // );
         });
 
         // таблиця юзерів
@@ -65,11 +79,11 @@ public class AppDbContext : DbContext
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Name).IsRequired().HasMaxLength(50);
             
-            entity.HasData(
-                new Position((int)PositionType.Assistant, PositionType.Assistant.ToString()),
-                new Position((int)PositionType.Docent, PositionType.Docent.ToString()),
-                new Position((int)PositionType.Professor, PositionType.Professor.ToString())
-            );
+            // entity.HasData(
+            //     new Position((int)PositionType.Assistant, PositionType.Assistant.ToString()),
+            //     new Position((int)PositionType.Docent, PositionType.Docent.ToString()),
+            //     new Position((int)PositionType.Professor, PositionType.Professor.ToString())
+            // );
         });
         
         // таблиця кафедри
@@ -86,11 +100,11 @@ public class AppDbContext : DbContext
                 .HasForeignKey(d => d.HeadTeacherId)
                 .OnDelete(DeleteBehavior.Restrict);
             
-            entity.HasData(
-                new Department(1, "Автоматизації, комп’ютерних наук і технологій", null),
-                new Department(2, "Моделювання та програмне забезпечення", null),
-                new Department(3, "Комп’ютерні системи та мережі", null)
-            );
+            // entity.HasData(
+            //     new Department(1, "Автоматизації, комп’ютерних наук і технологій", null),
+            //     new Department(2, "Моделювання та програмне забезпечення", null),
+            //     new Department(3, "Комп’ютерні системи та мережі", null)
+            // );
         });
         
         // таблиця вчителів 
@@ -119,11 +133,11 @@ public class AppDbContext : DbContext
             entity.Property(u => u.CreatedAt).IsRequired();
             entity.Property(u => u.UpdatedAt).IsRequired();
          
-            entity.HasData(
-                new Subject (1, "Математичний аналіз", 1, 6),
-                new Subject (2, "ООП", 1, 10),
-                new Subject (3, "Розробка програмного забезпечення", 1, 10)
-            );
+            // entity.HasData(
+            //     new Subject (1, "Математичний аналіз", 1, 6),
+            //     new Subject (2, "ООП", 1, 10),
+            //     new Subject (3, "Розробка програмного забезпечення", 1, 10)
+            // );
         });
         
         // таблиця студентів 

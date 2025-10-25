@@ -1,0 +1,6 @@
+﻿[
+  { "Id": 1, "Name": "Programming Basics", "Semester": 1, "Credits": 5 },
+  { "Id": 2, "Name": "Database Systems", "Semester": 2, "Credits": 4 },
+  { "Id": 3, "Name": "Object-Oriented Programming", "Semester": 2, "Credits": 5 },
+  { "Id": 4, "Name": "Web Technologies", "Semester": 3, "Credits": 4 }
+]

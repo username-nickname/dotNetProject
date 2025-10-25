@@ -6,6 +6,7 @@ using Application.Interfaces;
 using Application.Interfaces.Services;
 using Application.Logic.Converters;
 using Application.Services;
+using Infrastructure.Seeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,10 +35,12 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<IGradeService, GradeService>();
+        services.AddScoped<IReportService, ReportService>();
         
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGradeConverter, GradeConverter>();
+        services.AddScoped<DataSeeder>();
 
         return services;
     }
