@@ -47,7 +47,7 @@ public class StudentService : IStudentService
         if (student == null) throw new UserNotFoundException();
     
         var subjects = student.Subjects
-            .Select(ss => new SubjectResponseDto(ss.Subject.Id, ss.Subject.Name))
+            .Select(ss => new SubjectResponseDto(ss.Subject.Id, ss.Subject.Name, ss.Subject.Credits))
             .ToList();
     
         return subjects; 

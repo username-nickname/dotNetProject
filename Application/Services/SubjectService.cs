@@ -1,0 +1,85 @@
+using Application.DTO.Subject;
+using Application.Interfaces.Services;
+using Domain.Entities;
+using Domain.Exceptions;
+using Domain.Interfaces;
+using FluentValidation;
+
+namespace Application.Services;
+
+public class SubjectService : ISubjectService
+{
+    private readonly IValidator<AddSubjectDto> _addSubjectValidator;
+    private readonly IValidator<UpdateSubjectDto> _updateSubjectValidator;
+    private readonly ISubjectRepository _subjectRepository;
+    
+    public SubjectService(
+        IValidator<AddSubjectDto> addSubjectValidator,
+        IValidator<UpdateSubjectDto> updateSubjectValidator,
+        ISubjectRepository subjectRepository
+    )
+    {
+        _addSubjectValidator = addSubjectValidator;
+        _updateSubjectValidator = updateSubjectValidator;
+        _subjectRepository = subjectRepository;
+    }
+
+    
+    public async Task AddSubject(AddSubjectDto dto)
+    {
+        var validationResult = await _addSubjectValidator.ValidateAsync(dto);
+        
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException(validationResult.Errors); 
+        }
+
+        var subject = Subject.CreateNew(dto.Name, dto.Semester, dto.Credits);
+        
+        await _subjectRepository.Add(subject);
+    }
+
+    public async Task UpdateSubject(UpdateSubjectDto dto, int subjectId)
+    {
+        var validationResult = await _updateSubjectValidator.ValidateAsync(dto);
+        
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException(validationResult.Errors); 
+        }
+
+        var subject = await _subjectRepository.GetById(subjectId);
+
+        if (subject == null) throw new SubjectNotFoundException(subjectId);
+
+        if (!string.IsNullOrEmpty(dto.Name))
+        {
+            subject.UpdateName(dto.Name); 
+        }
+        
+        if (dto.Semester.HasValue)
+        {
+            subject.UpdateSemester(dto.Semester.Value);
+        }
+
+        if (dto.Credits.HasValue)
+        {
+            subject.UpdateCredits(dto.Credits.Value);
+        }
+
+        await _subjectRepository.SaveChanges();
+    }
+
+    public async Task<IEnumerable<SubjectResponseDto>> GetAllSubjects()
+    {
+        var subjects = await _subjectRepository.GetAll();
+        
+        var result = subjects.Select(subject => new SubjectResponseDto(
+            subject.Id, 
+            subject.Name,
+            subject.Credits
+            ));
+
+        return result;
+    }
+}

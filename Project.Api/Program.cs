@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Application.Validation.Grade;
 using Application.Validation.Student;
+using Application.Validation.Subject;
 using Infrastructure.Persistence;
 using Infrastructure.Seeding;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<GetGradesQueryDtoValidator>
 builder.Services.AddValidatorsFromAssemblyContaining<CalculateStudentGpaQueryDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<GetGroupStatisticsQueryDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<GetGroupReportQueryDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AddSubjectDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateSubjectDtoValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 

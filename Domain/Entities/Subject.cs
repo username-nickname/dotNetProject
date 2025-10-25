@@ -22,7 +22,7 @@ public class Subject : IAuditableEntity
 
     public Subject(int id, string name, int semester, int credits)
     {
-        // TODO: Возможно позже переделать создание через маршруты, а не дефолт. знач. в БД
+        // TODO: Возможно при сдаче проекта удалить этот конструтор. Используется только в DbContext и сидере. 
         Id = id;
         Name = name;
         Semester = semester;
@@ -32,7 +32,45 @@ public class Subject : IAuditableEntity
     public static Subject CreateNew(string name, int semester, int credits)
     {
         ValidateRequiredString(name,  nameof(name));
+        
+        if (semester < 0 || semester > 8)
+        {
+            throw new ArgumentOutOfRangeException(nameof(semester), "Семестер має бути в діапазоні 1-8.");
+        }
+        
+        if (credits < 0 || credits > 100)
+        {
+            throw new ArgumentOutOfRangeException(nameof(credits), "Кредити мають бути в діапазоні 1-100.");
+        }
+        
         return new Subject { Name = name, Semester = semester, Credits = credits };
+    }
+
+    public void UpdateName(string name)
+    {
+        ValidateRequiredString(name, nameof(name));
+
+        Name = name;
+    }
+
+    public void UpdateSemester(int semester)
+    {
+        if (semester < 0 || semester > 8)
+        {
+            throw new ArgumentOutOfRangeException(nameof(semester), "Семестер має бути в діапазоні 1-8.");
+        }
+        
+        Semester = semester;
+    }
+
+    public void UpdateCredits(int credits)
+    {
+        if (credits < 0 || credits > 100)
+        {
+            throw new ArgumentOutOfRangeException(nameof(credits), "Кредити мають бути в діапазоні 1-100.");
+        }
+        
+        Credits = credits;
     }
     
     private static void ValidateRequiredString(string value, string argumentName)

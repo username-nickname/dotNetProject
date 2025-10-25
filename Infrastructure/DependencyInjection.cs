@@ -35,6 +35,7 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<IGradeService, GradeService>();
+        services.AddScoped<ISubjectService, SubjectService>();
         services.AddScoped<IReportService, ReportService>();
         
         services.AddScoped<IPasswordHasher, PasswordHasher>();
