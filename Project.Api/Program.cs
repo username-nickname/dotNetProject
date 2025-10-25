@@ -1,5 +1,6 @@
 using Application.Validation.User;
 using Application.Validation.Auth;
+using Application.Validation.Report;
 using FluentValidation;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -53,6 +54,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<AddGradeDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateGradeDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<GetGradesQueryDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CalculateStudentGpaQueryDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetGroupStatisticsQueryDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetGroupReportQueryDtoValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 

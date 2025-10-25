@@ -1,5 +1,5 @@
-﻿using Application.Interfaces.Services;
-using Domain.Exceptions;
+﻿using Application.DTO.Reports.Query;
+using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +22,6 @@ public class ReportController : ApiControllerBase
     {
         var report =
             await _reportService.GetStudentReport(studentId, semester);
-        
-        if (report == null)
-            throw new UserNotFoundException(
-                $"Student with Id {studentId} not found");
 
         return OkDataResponse(report,
             "Student semester report");
@@ -35,10 +31,6 @@ public class ReportController : ApiControllerBase
     public async Task<IActionResult> GetFinalStudentReport(int studentId)
     {
         var report = await _reportService.GetFinalReport(studentId);
-        
-        if (report == null)
-            throw new UserNotFoundException(
-                $"Student with Id {studentId} not found");
 
         return OkDataResponse(report,
             "Final student report.");
@@ -46,32 +38,18 @@ public class ReportController : ApiControllerBase
 
     [HttpGet("group/")]
     public async Task<IActionResult> GetGroupReport(
-        [FromQuery] string groupName,
-        [FromQuery] int semester)
+        [FromQuery] GetGroupReportQueryDto dto)
     {
-        var report = await _reportService.GetGroupReport(groupName, semester);
-        
-        if (report == null)
-            throw new UserNotFoundException(
-                $"Group with name {groupName} not found");
+        var report = await _reportService.GetGroupReport(dto);
 
         return OkDataResponse(report, "Group report.");
     }
 
     [HttpGet("group/statistics")]
-    public async Task<IActionResult> GetGroupStatistics(
-        [FromQuery] string groupName,
-        [FromQuery] int semester
-    )
+    public async Task<IActionResult> GetGroupStatistics([FromQuery] GetGroupStatisticsQueryDto dto)
     {
-        if (string.IsNullOrWhiteSpace(groupName))
-            return BadRequest("Назва групи не може бути порожньою.");
         var stats =
-            await _reportService.GetGroupStatistics(groupName, semester);
-
-        if (stats == null)
-            throw new UserNotFoundException(
-                $"Group with name {groupName} not found");
+            await _reportService.GetGroupStatistics(dto);
 
         return OkDataResponse(stats, "Group statistics");
     }
@@ -80,10 +58,6 @@ public class ReportController : ApiControllerBase
     public async Task<IActionResult> GetTeacherSubjectAverages(int teacherId)
     {
         var report = await _reportService.GetTeacherSubjectAverages(teacherId);
-
-        if (report == null)
-            throw new UserNotFoundException(
-                $"Teacher with Id {teacherId} not found");
 
         return OkDataResponse(report, "Середній бал предметів вчителя");
     }
@@ -94,10 +68,6 @@ public class ReportController : ApiControllerBase
     {
         var report =
             await _reportService.GetTeacherSemesterGradeCounts(teacherId);
-
-        if (report == null)
-            throw new UserNotFoundException(
-                $"Teacher with Id {teacherId} not found");
         
         return OkDataResponse(report, "Кількість оцінок вчителя за семестр");
     }
@@ -106,10 +76,6 @@ public class ReportController : ApiControllerBase
     public async Task<IActionResult> GetDepartmentReport(int departmentId)
     {
         var report = await _reportService.GetDepartmentReport(departmentId);
-        
-        if (report == null)
-            throw new UserNotFoundException(
-                $"Department with Id {departmentId} not found");
         
         return OkDataResponse(report, "Загальна статистика кафедри");
     }

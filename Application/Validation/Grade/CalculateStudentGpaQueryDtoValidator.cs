@@ -18,6 +18,6 @@ public class CalculateStudentGpaQueryDtoValidator: AbstractValidator<CalculateSt
 
         RuleFor(x => x.Semester)
             .GreaterThan(0).WithMessage("Семестр має бути додатнім")
-            .LessThan(3).WithMessage("Семестр має бути менше за 3");
+            .LessThan(9).WithMessage("Семестр має бути менше за 9");
     }
 }

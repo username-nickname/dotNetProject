@@ -1,5 +1,5 @@
 ﻿[
-  { "Id": 1, "Name": "Admin" },
+  { "Id": 1, "Name": "Student" },
   { "Id": 2, "Name": "Teacher" },
-  { "Id": 3, "Name": "Student" }
+  { "Id": 3, "Name": "HeadOfDepartment" }
 ]

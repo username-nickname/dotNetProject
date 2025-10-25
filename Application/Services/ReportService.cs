@@ -1,7 +1,10 @@
 ﻿using Application.DTO.Reports;
+using Application.DTO.Reports.Query;
 using Application.Interfaces;
 using Application.Interfaces.Services;
+using Domain.Exceptions;
 using Domain.Interfaces;
+using FluentValidation;
 
 namespace Application.Services;
 
@@ -13,13 +16,17 @@ public class ReportService : IReportService
     private readonly ISubjectRepository _subjectRepository;
     private readonly IGradeConverter _gradeConverter;
     private readonly IDepartmentRepository _departmentRepository;
+    private readonly IValidator<GetGroupStatisticsQueryDto> _getGroupStatisticsQueryValidator;
+    private readonly IValidator<GetGroupReportQueryDto> _getGroupReportQueryValidator;
 
     public ReportService(IGradeRepository gradeRepository,
         IStudentRepository studentRepository,
         ITeacherRepository teacherRepository,
         ISubjectRepository subjectRepository,
         IGradeConverter gradeConverter,
-        IDepartmentRepository departmentRepository
+        IDepartmentRepository departmentRepository,
+        IValidator<GetGroupStatisticsQueryDto> getGroupStatisticsQueryValidator,
+        IValidator<GetGroupReportQueryDto> getGroupReportQueryValidator
     )
     {
         _gradeRepository = gradeRepository;
@@ -28,13 +35,15 @@ public class ReportService : IReportService
         _subjectRepository = subjectRepository;
         _gradeConverter = gradeConverter;
         _departmentRepository = departmentRepository;
+        _getGroupStatisticsQueryValidator = getGroupStatisticsQueryValidator;
+        _getGroupReportQueryValidator = getGroupReportQueryValidator;
     }
 
-    public async Task<StudentReportDto?> GetStudentReport(int studentId,
+    public async Task<StudentReportDto> GetStudentReport(int studentId,
         int semester)
     {
         var student = await _studentRepository.GetByIdWithSubjects(studentId);
-        if (student == null) return null;
+        if (student == null) throw new UserNotFoundException($"Student with Id {studentId} not found");
 
         var grades =
             await _gradeRepository.GetGradesByStudentAndSemester(studentId,
@@ -83,33 +92,33 @@ public class ReportService : IReportService
             FullName = student.FullName,
             Semester = semester,
             AverageGrade = Math.Round(overall, 2),
+            AverageGradeLetter = overallLetter,
             IsPassed = isPassed,
             Grades = result
         };
     }
 
-    public async Task<GroupReportDto?> GetGroupReport(string groupName,
-        int semester)
+    public async Task<GroupReportDto> GetGroupReport(GetGroupReportQueryDto dto)
     {
-        if (string.IsNullOrWhiteSpace(groupName))
-            return null;
+        var validationResult = await _getGroupReportQueryValidator.ValidateAsync(dto);
+        
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException(validationResult.Errors); 
+        }
 
-        var group = await _studentRepository.GroupExistsByName(groupName);
-        if (!group) return null;
-
-        var students = await _studentRepository.GetByGroup(groupName);
+        var students = await _studentRepository.GetByGroup(dto.GroupName);
         var result = new GroupReportDto
         {
-            GroupName = groupName,
-            Semester = semester,
+            GroupName = dto.GroupName,
+            Semester = dto.Semester,
             StudentReports = []
         };
 
         foreach (var student in students)
         {
-            var report = await GetStudentReport(student.Id, semester);
-            if (report != null)
-                result.StudentReports.Add(report);
+            var report = await GetStudentReport(student.Id, dto.Semester);
+            result.StudentReports.Add(report);
         }
 
         result.GroupAverage = result.StudentReports.Count > 0
@@ -119,10 +128,10 @@ public class ReportService : IReportService
         return result;
     }
 
-    public async Task<FinalStudentReportDto?> GetFinalReport(int studentId)
+    public async Task<FinalStudentReportDto> GetFinalReport(int studentId)
     {
         var student = await _studentRepository.GetByIdWithSubjects(studentId);
-        if (student == null) return null;
+        if (student == null) throw new UserNotFoundException($"Student with Id {studentId} not found");
 
         var grades = await _gradeRepository.GetGradesByStudentId(studentId);
         if (grades.Count == 0)
@@ -175,17 +184,24 @@ public class ReportService : IReportService
         };
     }
 
-    public async Task<GroupStatisticsDto> GetGroupStatistics(string groupName,
-        int semester)
+    public async Task<GroupStatisticsDto> GetGroupStatistics(GetGroupStatisticsQueryDto dto)
     {
+        var validationResult = await _getGroupStatisticsQueryValidator.ValidateAsync(dto);
+        
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException(validationResult.Errors); 
+        }
+        
         var grades =
-            await _gradeRepository.GetGradesByGroupAndSemester(groupName,
-                semester);
+            await _gradeRepository.GetGradesByGroupAndSemester(dto.GroupName,
+                dto.Semester);
+        
         if (grades.Count == 0)
             return new GroupStatisticsDto
             {
-                GroupName = groupName,
-                Semester = semester,
+                GroupName = dto.GroupName,
+                Semester = dto.Semester,
                 AverageGroupGrade = 0,
                 FailedCount = 0,
                 TotalStudents = 0
@@ -204,27 +220,26 @@ public class ReportService : IReportService
 
         return new GroupStatisticsDto
         {
-            GroupName = groupName,
-            Semester = semester,
+            GroupName = dto.GroupName,
+            Semester = dto.Semester,
             AverageGroupGrade = Math.Round(avgGroupGrade, 2),
             TotalStudents = totalStudents,
             FailedCount = failedCount
         };
     }
 
-    public async Task<IEnumerable<TeacherSubjectAverageDto>?>
+    public async Task<IEnumerable<TeacherSubjectAverageDto>>
         GetTeacherSubjectAverages(int teacherId)
     {
         var teacher = await _teacherRepository.ExistsById(teacherId);
-        if (!teacher)
-            return null;
+        if (!teacher) throw new UserNotFoundException($"Teacher with Id {teacherId} not found");
 
         var grades = (await _gradeRepository.GetGradesByTeacher(teacherId))
             .ToList();
 
         if (grades.Count == 0)
         {
-            return null;
+            return [];
         }
 
         var report = grades
@@ -240,19 +255,18 @@ public class ReportService : IReportService
         return report;
     }
 
-    public async Task<IEnumerable<TeacherSemesterGradeCountDto>?>
+    public async Task<IEnumerable<TeacherSemesterGradeCountDto>>
         GetTeacherSemesterGradeCounts(int teacherId)
     {
         var teacher = await _teacherRepository.ExistsById(teacherId);
-        if (!teacher)
-            return null;
+        if (!teacher) throw new UserNotFoundException($"Teacher with Id {teacherId} not found");
 
         var grades = (await _gradeRepository.GetGradesByTeacher(teacherId))
             .ToList();
 
         if (grades.Count == 0)
         {
-            return null;
+            return [];
         }
 
         var report = grades
@@ -268,11 +282,11 @@ public class ReportService : IReportService
         return report;
     }
 
-    public async Task<DepartmentReportDto?> GetDepartmentReport(
+    public async Task<DepartmentReportDto> GetDepartmentReport(
         int departmentId)
     {
         var department = await _departmentRepository.ExistsById(departmentId);
-        if (!department) return null;
+        if (!department) throw new DepartmentNotFoundException(departmentId);
 
         var grades =
             (await _gradeRepository.GetGradesByDepartment(departmentId))
