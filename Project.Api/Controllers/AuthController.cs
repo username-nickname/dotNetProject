@@ -29,11 +29,6 @@ public class AuthController : ApiControllerBase
     public async Task<IActionResult> LoginUser([FromBody] LoginUserDto dto)
     {
         var token= await _authService.Login(dto);
-            
-        if (token == null)
-        {
-            return Unauthorized(new { message = "Incorrect Email or Password." });
-        }
 
         return OkDataResponse(new { token = token });
     }

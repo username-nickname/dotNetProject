@@ -18,12 +18,12 @@ public class UserRepository : IUserRepository
         return await _context.Users.AnyAsync(u => u.Email == email);
     }
 
-    public async Task<User> GetById(int id)
+    public async Task<User?> GetById(int id)
     {
         return await _context.Users.FindAsync(id);
     }
 
-    public async Task<User> GetByEmail(string email)
+    public async Task<User?> GetByEmail(string email)
     {
         return await _context.Users
             .Include(u => u.Role)

@@ -1,3 +1,6 @@
+using Domain.Enums;
+using Infrastructure.Security.Attributes;
+
 namespace Project.Api.Controllers;
 
 using Application.DTO.Student;
@@ -17,7 +20,7 @@ public class StudentController : ApiControllerBase
     }
 
     [HttpPost("subjects/assign")]
-    [Authorize]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> AssignSubject([FromBody] AssignSubjectStudentDto dto)
     {
         await _studentService.AssignSubject(dto);
@@ -26,6 +29,7 @@ public class StudentController : ApiControllerBase
     }
 
     [HttpGet("{studentId}/subjects")]
+    [Authorize]
     public async Task<IActionResult> GetStudentSubjects(int studentId)
     {
         var subjectDto = await _studentService.GetStudentSubjects(studentId);

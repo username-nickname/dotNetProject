@@ -1,5 +1,7 @@
 ﻿using Application.DTO.Reports.Query;
 using Application.Interfaces.Services;
+using Domain.Enums;
+using Infrastructure.Security.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +18,8 @@ public class ReportController : ApiControllerBase
         _reportService = reportService;
     }
 
-    [HttpGet("student/{studentId:int}/semester/{semester:int}"), AllowAnonymous]
+    [HttpGet("student/{studentId:int}/semester/{semester:int}")]
+    // [Authorize]
     public async Task<IActionResult> GetStudentReport(int studentId,
         int semester)
     {
@@ -28,6 +31,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("student/{studentId:int}/final")]
+    // [Authorize]
     public async Task<IActionResult> GetFinalStudentReport(int studentId)
     {
         var report = await _reportService.GetFinalReport(studentId);
@@ -37,6 +41,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("group/")]
+    // [Authorize]
     public async Task<IActionResult> GetGroupReport(
         [FromQuery] GetGroupReportQueryDto dto)
     {
@@ -46,6 +51,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("group/statistics")]
+    // [Authorize]
     public async Task<IActionResult> GetGroupStatistics([FromQuery] GetGroupStatisticsQueryDto dto)
     {
         var stats =
@@ -55,6 +61,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("teacher/{teacherId:int}/average")]
+    // [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetTeacherSubjectAverages(int teacherId)
     {
         var report = await _reportService.GetTeacherSubjectAverages(teacherId);
@@ -63,6 +70,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("teacher/{teacherId:int}/semester-count")]
+    // [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetTeacherSemesterGradeCounts(
         int teacherId)
     {
@@ -73,6 +81,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("department/{departmentId:int}")]
+    // [RoleAuthorize(RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetDepartmentReport(int departmentId)
     {
         var report = await _reportService.GetDepartmentReport(departmentId);

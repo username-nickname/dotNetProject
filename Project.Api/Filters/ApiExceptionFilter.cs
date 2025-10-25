@@ -30,6 +30,11 @@ public class ApiExceptionFilter : ExceptionFilterAttribute
                 statusCode = StatusCodes.Status404NotFound;
                 message = exception.Message;
                 break;
+
+            case AuthenticationFailedException:
+                statusCode = StatusCodes.Status401Unauthorized;
+                message = exception.Message;
+                break;
                 
             case InvalidPasswordException or InvalidOperationException:
                 statusCode = StatusCodes.Status400BadRequest;

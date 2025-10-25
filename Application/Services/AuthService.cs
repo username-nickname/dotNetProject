@@ -98,16 +98,16 @@ public class AuthService : IAuthService
 
         var user = await _userRepository.GetByEmail(dto.Email);
 
-        if (user == null)
+        var isPasswordValid = false;
+    
+        if (user != null)
         {
-            return null;
+            isPasswordValid = _passwordHasher.VerifyPassword(dto.Password, user.PasswordHash);
         }
         
-        bool isPasswordValid = _passwordHasher.VerifyPassword(dto.Password, user.PasswordHash);
-        
-        if (!isPasswordValid)
+        if (user == null || !isPasswordValid)
         {
-            return null;
+            throw new AuthenticationFailedException("Invalid username or password.");
         }
         
         return _tokenGenerator.GenerateToken(user);

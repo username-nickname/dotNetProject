@@ -14,7 +14,7 @@ public class DepartmentRepository : IDepartmentRepository
         _context = context;
     }
 
-    public async Task<Department> GetById(int id)
+    public async Task<Department?> GetById(int id)
     {
         return await _context.Departments.FindAsync(id);
     }

@@ -21,7 +21,7 @@ public class GradeController : ApiControllerBase
     }
     
     [HttpPost("add")]
-    [RoleAuthorize(RoleType.Teacher)]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> AddGrade([FromBody] AddGradeDto dto)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -36,7 +36,7 @@ public class GradeController : ApiControllerBase
     }
     
     [HttpPatch("update")]
-    [RoleAuthorize(RoleType.Teacher)]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> UpdateGrade([FromBody] UpdateGradeDto dto)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -51,7 +51,7 @@ public class GradeController : ApiControllerBase
     }
     
     [HttpDelete("{gradeId}/delete")]
-    [RoleAuthorize(RoleType.Teacher)]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> DeleteGrade(int gradeId)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -66,7 +66,7 @@ public class GradeController : ApiControllerBase
     }
     
     [HttpGet("subject-grades")]
-    [RoleAuthorize(RoleType.Teacher)]
+    [Authorize]
     public async Task<IActionResult> GetGradesForSubject([FromQuery] GetGradesQueryDto queryDto)
     {
         var grades = await _gradeService.GetGradesForSubject(queryDto);
@@ -75,7 +75,7 @@ public class GradeController : ApiControllerBase
     }
     
     [HttpGet("gpa")]
-    [Authorize(Roles = "Teacher")] 
+    [Authorize]
     public async Task<IActionResult> CalculateGpa([FromQuery] CalculateStudentGpaQueryDto queryDto)
     {
         var gpaResult = await _gradeService.CalculateStudentGpa(queryDto);
