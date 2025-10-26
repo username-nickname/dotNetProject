@@ -1,4 +1,72 @@
-﻿[
-  { "Id": 1, "FullName": "Olena Vasylyna", "Group": "GroupA-23", "YearOfEntry": 2023, "UserId": 4 },
-  { "Id": 2, "FullName": "Mykhailo Ivanov", "Group": "GroupB-22", "YearOfEntry": 2022, "UserId": 5 }
+[
+  {
+    "Id": 1,
+    "FullName": "Olena Vasylyna",
+    "Group": "GroupA-23",
+    "YearOfEntry": 2023,
+    "UserId": 4
+  },
+  {
+    "Id": 2,
+    "FullName": "Mykhailo Ivanov",
+    "Group": "GroupB-22",
+    "YearOfEntry": 2022,
+    "UserId": 5
+  },
+  {
+    "Id": 3,
+    "FullName": "Andriy Koval",
+    "Group": "GroupC-24",
+    "YearOfEntry": 2023,
+    "UserId": 6
+  },
+  {
+    "Id": 4,
+    "FullName": "Iryna Moskalenko",
+    "Group": "GroupA-23",
+    "YearOfEntry": 2023,
+    "UserId": 7
+  },
+  {
+    "Id": 5,
+    "FullName": "Oleh Khmelyuk",
+    "Group": "GroupB-22",
+    "YearOfEntry": 2021,
+    "UserId": 8
+  },
+  {
+    "Id": 6,
+    "FullName": "Nadiia Savchuk",
+    "Group": "GroupA-23",
+    "YearOfEntry": 2021,
+    "UserId": 9
+  },
+  {
+    "Id": 7,
+    "FullName": "Vasyl Bondarenko",
+    "Group": "GroupA-23",
+    "YearOfEntry": 2021,
+    "UserId": 10
+  },
+  {
+    "Id": 8,
+    "FullName": "Sofia Kuznetsova",
+    "Group": "GroupC-24",
+    "YearOfEntry": 2023,
+    "UserId": 11
+  },
+  {
+    "Id": 9,
+    "FullName": "Dmytro Tarasenko",
+    "Group": "GroupA-23",
+    "YearOfEntry": 2023,
+    "UserId": 12
+  },
+  {
+    "Id": 10,
+    "FullName": "Yulia Romanenko",
+    "Group": "GroupA-23",
+    "YearOfEntry": 2023,
+    "UserId": 13
+  }
 ]

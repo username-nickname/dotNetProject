@@ -81,11 +81,20 @@ public class GradeRepository : IGradeRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Grade>> GetGradesByGroupAsync(string groupName)
+    {
+        return await _context.Grades
+            .Include(g => g.Student)
+            .Where(g => g.Student.Group == groupName)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Grade>> GetGradesByDepartment(
         int departmentId)
     {
         return await _context.Grades
             .Include(g => g.Teacher)
+            .Include(g => g.Student)
             .Where(g => g.Teacher.DepartmentId == departmentId)
             .ToListAsync();
     }

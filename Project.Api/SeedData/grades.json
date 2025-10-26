@@ -1,6 +1,443 @@
-﻿[
-  { "StudentId": 1, "SubjectId": 1, "TeacherId": 1, "NumericValue": 95, "LetterValue": "A" },
-  { "StudentId": 1, "SubjectId": 2, "TeacherId": 2, "NumericValue": 88, "LetterValue": "B" },
-  { "StudentId": 2, "SubjectId": 1, "TeacherId": 1, "NumericValue": 75, "LetterValue": "C" },
-  { "StudentId": 2, "SubjectId": 3, "TeacherId": 1, "NumericValue": 92, "LetterValue": "A" }
+[
+  {
+    "StudentId": 1,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 95,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 88,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 75,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 3,
+    "TeacherId": 1,
+    "NumericValue": 92,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 74,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 80,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 64,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 96,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 4,
+    "TeacherId": 2,
+    "NumericValue": 91,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 4,
+    "TeacherId": 1,
+    "NumericValue": 89,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 68,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 3,
+    "TeacherId": 5,
+    "NumericValue": 97,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 9,
+    "TeacherId": 3,
+    "NumericValue": 83,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 9,
+    "TeacherId": 3,
+    "NumericValue": 68,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 63,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 69,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 7,
+    "TeacherId": 4,
+    "NumericValue": 98,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 84,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 9,
+    "TeacherId": 3,
+    "NumericValue": 95,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 9,
+    "TeacherId": 3,
+    "NumericValue": 67,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 67,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 87,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 10,
+    "TeacherId": 1,
+    "NumericValue": 60,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 6,
+    "TeacherId": 3,
+    "NumericValue": 92,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 6,
+    "TeacherId": 3,
+    "NumericValue": 100,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 10,
+    "TeacherId": 1,
+    "NumericValue": 69,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 10,
+    "TeacherId": 1,
+    "NumericValue": 70,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 4,
+    "TeacherId": 1,
+    "NumericValue": 91,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 83,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 63,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 1,
+    "TeacherId": 1,
+    "NumericValue": 96,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 4,
+    "TeacherId": 2,
+    "NumericValue": 91,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 68,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 76,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 73,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 4,
+    "TeacherId": 1,
+    "NumericValue": 85,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 93,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 67,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 7,
+    "TeacherId": 3,
+    "NumericValue": 64,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 97,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 97,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 8,
+    "TeacherId": 1,
+    "NumericValue": 64,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 6,
+    "TeacherId": 3,
+    "NumericValue": 64,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 3,
+    "TeacherId": 5,
+    "NumericValue": 64,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 4,
+    "TeacherId": 1,
+    "NumericValue": 91,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 96,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 90,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 2,
+    "TeacherId": 2,
+    "NumericValue": 72,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 10,
+    "TeacherId": 1,
+    "NumericValue": 87,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 3,
+    "TeacherId": 5,
+    "NumericValue": 86,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 3,
+    "TeacherId": 5,
+    "NumericValue": 63,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 9,
+    "TeacherId": 3,
+    "NumericValue": 85,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 4,
+    "TeacherId": 2,
+    "NumericValue": 75,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 4,
+    "TeacherId": 2,
+    "NumericValue": 72,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 3,
+    "TeacherId": 1,
+    "NumericValue": 87,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 3,
+    "TeacherId": 1,
+    "NumericValue": 77,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 8,
+    "TeacherId": 1,
+    "NumericValue": 64,
+    "LetterValue": "D"
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 8,
+    "TeacherId": 1,
+    "NumericValue": 95,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 7,
+    "TeacherId": 3,
+    "NumericValue": 94,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 5,
+    "TeacherId": 2,
+    "NumericValue": 75,
+    "LetterValue": "C"
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 9,
+    "TeacherId": 3,
+    "NumericValue": 91,
+    "LetterValue": "A"
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 4,
+    "TeacherId": 2,
+    "NumericValue": 85,
+    "LetterValue": "B"
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 4,
+    "TeacherId": 2,
+    "NumericValue": 70,
+    "LetterValue": "C"
+  }
 ]

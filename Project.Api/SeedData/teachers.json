@@ -1,4 +1,44 @@
-﻿[
-  { "Id": 1, "FullName": "Dr. Ivan Petrenko", "DepartmentId": 1, "PositionId": 1, "UserId": 2 },
-  { "Id": 2, "FullName": "Dr. Maria Kovalenko", "DepartmentId": 2, "PositionId": 2, "UserId": 3 }
+[
+  {
+    "Id": 1,
+    "FullName": "Dr. Ivan Petrenko",
+    "DepartmentId": 1,
+    "PositionId": 1,
+    "UserId": 2
+  },
+  {
+    "Id": 2,
+    "FullName": "Dr. Maria Kovalenko",
+    "DepartmentId": 2,
+    "PositionId": 2,
+    "UserId": 3
+  },
+  {
+    "Id": 3,
+    "FullName": "Prof. Anna Shevchenko",
+    "DepartmentId": 1,
+    "PositionId": 1,
+    "UserId": 14
+  },
+  {
+    "Id": 4,
+    "FullName": "Assoc. Prof. Petro Lysenko",
+    "DepartmentId": 3,
+    "PositionId": 1,
+    "UserId": 15
+  },
+  {
+    "Id": 5,
+    "FullName": "Lect. Kateryna Bondar",
+    "DepartmentId": 2,
+    "PositionId": 1,
+    "UserId": 16
+  },
+  {
+    "Id": 6,
+    "FullName": "Dr. Sergii Hrytsenko",
+    "DepartmentId": 1,
+    "PositionId": 3,
+    "UserId": 17
+  }
 ]

@@ -1,7 +1,162 @@
-﻿[
-  { "StudentId": 1, "SubjectId": 1 },
-  { "StudentId": 1, "SubjectId": 2 },
-  { "StudentId": 1, "SubjectId": 4 },
-  { "StudentId": 2, "SubjectId": 1 },
-  { "StudentId": 2, "SubjectId": 3 }
+[
+  {
+    "StudentId": 1,
+    "SubjectId": 1
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 4
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 1
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 3
+  },
+  {
+    "StudentId": 1,
+    "SubjectId": 9
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 2,
+    "SubjectId": 7
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 9
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 5
+  },
+  {
+    "StudentId": 3,
+    "SubjectId": 10
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 6
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 10
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 4
+  },
+  {
+    "StudentId": 4,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 1
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 4
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 5
+  },
+  {
+    "StudentId": 5,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 4
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 7
+  },
+  {
+    "StudentId": 6,
+    "SubjectId": 5
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 8
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 6
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 3
+  },
+  {
+    "StudentId": 7,
+    "SubjectId": 4
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 5
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 2
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 10
+  },
+  {
+    "StudentId": 8,
+    "SubjectId": 3
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 9
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 4
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 3
+  },
+  {
+    "StudentId": 9,
+    "SubjectId": 8
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 7
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 5
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 9
+  },
+  {
+    "StudentId": 10,
+    "SubjectId": 4
+  }
 ]

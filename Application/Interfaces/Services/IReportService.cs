@@ -12,4 +12,6 @@ public interface IReportService
     Task<IEnumerable<TeacherSubjectAverageDto>> GetTeacherSubjectAverages(int teacherId);
     Task<IEnumerable<TeacherSemesterGradeCountDto>> GetTeacherSemesterGradeCounts(int teacherId);
     Task<DepartmentReportDto> GetDepartmentReport(int departmentId);
+    Task<DepartmentStatisticsDto> GetDepartmentStatistics(int departmentId);
+    Task<IEnumerable<TopStudentDto>> GetGroupRating(string groupName);
 }

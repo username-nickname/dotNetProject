@@ -1,4 +1,27 @@
-﻿[
-  { "Id": 1, "Name": "Software Engineering", "HeadTeacherId": null },
-  { "Id": 2, "Name": "Cybersecurity", "HeadTeacherId": null }
+[
+  {
+    "Id": 1,
+    "Name": "Software Engineering",
+    "HeadTeacherId": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Cybersecurity",
+    "HeadTeacherId": 2
+  },
+  {
+    "Id": 3,
+    "Name": "Data Science",
+    "HeadTeacherId": 4
+  },
+  {
+    "Id": 4,
+    "Name": "Networks",
+    "HeadTeacherId": null
+  },
+  {
+    "Id": 5,
+    "Name": "AI Research",
+    "HeadTeacherId": null
+  }
 ]

@@ -1,7 +1,104 @@
-﻿[
-  { "Id": 1, "RoleId": 3, "Email": "admin@test.com", "Password": "password" },
-  { "Id": 2, "RoleId": 2, "Email": "ivan.petrenko@test.com", "Password": "password" },
-  { "Id": 3, "RoleId": 2, "Email": "maria.kovalenko@test.com", "Password": "password" },
-  { "Id": 4, "RoleId": 1, "Email": "olena.v@test.com", "Password": "password" },
-  { "Id": 5, "RoleId": 1, "Email": "mykhailo.i@test.com", "Password": "password" }
+[
+  {
+    "Id": 1,
+    "RoleId": 3,
+    "Email": "admin@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 2,
+    "RoleId": 2,
+    "Email": "ivan.petrenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 3,
+    "RoleId": 2,
+    "Email": "maria.kovalenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 4,
+    "RoleId": 1,
+    "Email": "olena.v@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 5,
+    "RoleId": 1,
+    "Email": "mykhailo.i@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 6,
+    "RoleId": 1,
+    "Email": "andriy.koval@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 7,
+    "RoleId": 1,
+    "Email": "iryna.moskalenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 8,
+    "RoleId": 1,
+    "Email": "oleh.khmelyuk@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 9,
+    "RoleId": 1,
+    "Email": "nadiia.savchuk@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 10,
+    "RoleId": 1,
+    "Email": "vasyl.bondarenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 11,
+    "RoleId": 1,
+    "Email": "sofia.kuznetsova@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 12,
+    "RoleId": 1,
+    "Email": "dmytro.tarasenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 13,
+    "RoleId": 1,
+    "Email": "yulia.romanenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 14,
+    "RoleId": 2,
+    "Email": "prof..anna.shevchenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 15,
+    "RoleId": 2,
+    "Email": "assoc..prof..petro.lysenko@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 16,
+    "RoleId": 2,
+    "Email": "lect..kateryna.bondar@test.com",
+    "Password": "password"
+  },
+  {
+    "Id": 17,
+    "RoleId": 2,
+    "Email": "dr..sergii.hrytsenko@test.com",
+    "Password": "password"
+  }
 ]

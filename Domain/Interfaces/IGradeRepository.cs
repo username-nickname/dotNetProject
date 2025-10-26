@@ -14,5 +14,6 @@ public interface IGradeRepository
     Task<List<Grade>> GetGradesByStudentId(int studentId);
     Task<List<Grade>> GetGradesByGroupAndSemester(string groupName, int semester);
     Task<IEnumerable<Grade>> GetGradesByTeacher(int teacherId);
+    Task<IEnumerable<Grade>> GetGradesByGroupAsync(string groupName);
     Task<IEnumerable<Grade>> GetGradesByDepartment(int departmentId);
 }

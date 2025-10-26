@@ -86,6 +86,21 @@ public class ReportController : ApiControllerBase
     {
         var report = await _reportService.GetDepartmentReport(departmentId);
         
-        return OkDataResponse(report, "Загальна статистика кафедри");
+        return OkDataResponse(report, "Звіт кафедри");
+    }
+
+    [HttpGet("department/{departmentId:int}/statistics")]
+    public async Task<IActionResult> GetDepartmentStatistics(int departmentId)
+    {
+        var stats = await _reportService.GetDepartmentStatistics(departmentId);
+        return OkDataResponse(stats, "Статистика кафедри");
+    }
+
+    [HttpGet("group/rating")]
+    public async Task<IActionResult> GetGroupRating([FromQuery] string groupName)
+    {
+        var report = await _reportService.GetGroupRating(groupName);
+
+        return OkDataResponse(report, "Group rating.");
     }
 }

@@ -1,6 +1,62 @@
-﻿[
-  { "Id": 1, "Name": "Programming Basics", "Semester": 1, "Credits": 5 },
-  { "Id": 2, "Name": "Database Systems", "Semester": 2, "Credits": 4 },
-  { "Id": 3, "Name": "Object-Oriented Programming", "Semester": 2, "Credits": 5 },
-  { "Id": 4, "Name": "Web Technologies", "Semester": 3, "Credits": 4 }
+[
+  {
+    "Id": 1,
+    "Name": "Programming Basics",
+    "Semester": 1,
+    "Credits": 5
+  },
+  {
+    "Id": 2,
+    "Name": "Database Systems",
+    "Semester": 2,
+    "Credits": 4
+  },
+  {
+    "Id": 3,
+    "Name": "Object-Oriented Programming",
+    "Semester": 2,
+    "Credits": 5
+  },
+  {
+    "Id": 4,
+    "Name": "Web Technologies",
+    "Semester": 3,
+    "Credits": 4
+  },
+  {
+    "Id": 5,
+    "Name": "Algorithms",
+    "Semester": 2,
+    "Credits": 5
+  },
+  {
+    "Id": 6,
+    "Name": "Databases",
+    "Semester": 2,
+    "Credits": 4
+  },
+  {
+    "Id": 7,
+    "Name": "Operating Systems",
+    "Semester": 3,
+    "Credits": 4
+  },
+  {
+    "Id": 8,
+    "Name": "Computer Networks",
+    "Semester": 3,
+    "Credits": 3
+  },
+  {
+    "Id": 9,
+    "Name": "Machine Learning",
+    "Semester": 4,
+    "Credits": 5
+  },
+  {
+    "Id": 10,
+    "Name": "Ethics in IT",
+    "Semester": 1,
+    "Credits": 2
+  }
 ]
