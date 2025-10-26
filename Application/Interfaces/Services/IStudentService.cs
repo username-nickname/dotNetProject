@@ -7,4 +7,5 @@ public interface IStudentService
 {
     Task AssignSubject(AssignSubjectStudentDto dto);
     Task<List<SubjectResponseDto>> GetStudentSubjects(int studentId);
+    Task<IEnumerable<StudentShortResponseDto>> GetStudentsByGroup(string groupName);
 }

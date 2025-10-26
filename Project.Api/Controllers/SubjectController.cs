@@ -18,7 +18,7 @@ public class SubjectController : ApiControllerBase
     }
     
     [HttpPost("add/")]
-    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
+    [RoleAuthorize(RoleType.HeadOfDepartment)]
     public async Task<IActionResult> AddSubject([FromBody] AddSubjectDto dto)
     {
         await _subjectService.AddSubject(dto);
@@ -27,7 +27,7 @@ public class SubjectController : ApiControllerBase
     }
     
     [HttpPatch("{subjectId}/update")]
-    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
+    [RoleAuthorize(RoleType.HeadOfDepartment)]
     public async Task<IActionResult> UpdateSubject([FromBody] UpdateSubjectDto dto, int subjectId)
     {
         await _subjectService.UpdateSubject(dto, subjectId);
@@ -41,6 +41,15 @@ public class SubjectController : ApiControllerBase
     {
         var result = await _subjectService.GetAllSubjects();
 
+        return OkDataResponse(result);
+    }
+
+    [HttpGet("{subjectId}/teachers")]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
+    public async Task<IActionResult> GetTeachersForSubject(int subjectId)
+    {
+        var result = await _subjectService.GetTeachersForSubject(subjectId);
+        
         return OkDataResponse(result);
     }
 }

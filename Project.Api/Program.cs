@@ -9,6 +9,7 @@ using System.Text;
 using Application.Validation.Grade;
 using Application.Validation.Student;
 using Application.Validation.Subject;
+using Application.Validation.Teacher;
 using Infrastructure.Persistence;
 using Infrastructure.Seeding;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,10 @@ using Project.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add(new ApiExceptionFilter()); 
-});
+builder.Services.AddControllers(options => { options.Filters.Add(new ApiExceptionFilter()); });
 
 // отключение стандартной обработки ошибки отсутствия полей в ДТО/ошибки валидации.
-builder.Services.Configure<ApiBehaviorOptions>(options =>
-{
-    options.SuppressModelStateInvalidFilter = true;
-});
+builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -59,6 +54,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<GetGroupStatisticsQueryDtoV
 builder.Services.AddValidatorsFromAssemblyContaining<GetGroupReportQueryDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<AddSubjectDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateSubjectDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AssignSubjectTeacherDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UnassignSubjectTeacherDtoValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -102,6 +99,6 @@ app.UseAuthentication(); // MIDDLEWARE
 app.UseMiddleware<JwtTokenVersionMiddleware>();
 app.UseAuthorization();
 
-app.MapControllers(); 
+app.MapControllers();
 
 app.Run();

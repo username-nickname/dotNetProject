@@ -51,6 +51,12 @@ public class ApiExceptionFilter : ExceptionFilterAttribute
                 message = exception.Message;
                 break;
             
+
+            case SubjectNotFoundException:
+                statusCode = StatusCodes.Status404NotFound;
+                message = exception.Message;
+                break;
+            
             case GradeNotFoundException:
                 statusCode = StatusCodes.Status404NotFound;
                 message = exception.Message;

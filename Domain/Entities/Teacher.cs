@@ -34,6 +34,30 @@ public class Teacher : IAuditableEntity
         };
     }
     
+    public void AssignSubject(int subjectId)
+    {
+        if (Subjects.Any(ss => ss.SubjectId == subjectId))
+        {
+            throw new InvalidOperationException("Предмет вже призначено цьому вчителю.");
+        }
+    
+        var teacherSubject = new TeacherSubject(Id, subjectId); 
+        Subjects.Add(teacherSubject);
+    }
+    
+    public void UnassignSubject(int subjectId)
+    {
+        var teacherSubject = Subjects
+            .FirstOrDefault(ts => ts.SubjectId == subjectId);
+
+        if (teacherSubject == null)
+        {
+            throw new InvalidOperationException("Цей предмет не призначено цьому вчителю.");
+        }
+
+        Subjects.Remove(teacherSubject);
+    }
+    
     private static void ValidateRequiredString(string value, string argumentName)
     {
         if (string.IsNullOrWhiteSpace(value))

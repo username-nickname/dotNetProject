@@ -48,6 +48,17 @@ public class SubjectRepository : ISubjectRepository
         return await _context.Subjects.ToListAsync();
     }
     
+    public async Task<IEnumerable<Teacher>> GetAssignedTeachers(int subjectId)
+    {
+        return await _context.Subjects
+            .Where(s => s.Id == subjectId)
+            .SelectMany(s => s.Teachers.Select(ts => ts.Teacher))
+            .Include(t => t.Position) 
+            .Include(t => t.Department)
+            .Distinct()
+            .ToListAsync();
+    }
+    
     public async Task SaveChanges()
     {
         await _context.SaveChangesAsync();

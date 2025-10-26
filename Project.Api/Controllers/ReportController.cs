@@ -90,6 +90,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("department/{departmentId:int}/statistics")]
+    // [RoleAuthorize(RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetDepartmentStatistics(int departmentId)
     {
         var stats = await _reportService.GetDepartmentStatistics(departmentId);
@@ -97,6 +98,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("group/rating")]
+    // [Authorize]
     public async Task<IActionResult> GetGroupRating([FromQuery] string groupName)
     {
         var report = await _reportService.GetGroupRating(groupName);

@@ -1,4 +1,5 @@
 using Application.DTO.Subject;
+using Application.DTO.Teacher;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Domain.Exceptions;
@@ -77,8 +78,26 @@ public class SubjectService : ISubjectService
         var result = subjects.Select(subject => new SubjectResponseDto(
             subject.Id, 
             subject.Name,
+            subject.Semester,
             subject.Credits
             ));
+
+        return result;
+    }
+    
+    public async Task<IEnumerable<TeacherShortResponseDto>> GetTeachersForSubject(int subjectId)
+    {
+        if (!await _subjectRepository.ExistsById(subjectId)) throw new SubjectNotFoundException(subjectId);
+
+        var teachers = await _subjectRepository.GetAssignedTeachers(subjectId);
+
+        var result = teachers.Select(teacher => new TeacherShortResponseDto
+        {
+            Id = teacher.Id,
+            FullName = teacher.FullName,
+            PositionName = teacher.Position?.Name ?? "N/A",
+            DepartmentName = teacher.Department?.Name ?? "N/A"
+        });
 
         return result;
     }

@@ -52,8 +52,15 @@ public class GradeService : IGradeService
         }
 
         var teacher = await _teacherRepository.GetByUserId(userId);
-
+        
         if (teacher == null) throw new UserNotFoundException("Вчителя не знайдено");
+        
+        var teachesSubject = await _teacherRepository.HasSubject(teacher.Id, dto.SubjectId);
+        
+        if (!teachesSubject)
+        {
+            throw new ForbiddenException($"Ви (Вчитель ID: {teacher.Id}) не викладаєте цей предмет (ID: {dto.SubjectId}).");
+        }
         
         var letterValue = _gradeConverter.ConvertToLetter(dto.Value);
         

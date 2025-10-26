@@ -47,9 +47,27 @@ public class StudentService : IStudentService
         if (student == null) throw new UserNotFoundException();
     
         var subjects = student.Subjects
-            .Select(ss => new SubjectResponseDto(ss.Subject.Id, ss.Subject.Name, ss.Subject.Credits))
+            .Select(ss => new SubjectResponseDto(ss.Subject.Id, ss.Subject.Name, ss.Subject.Semester, ss.Subject.Credits))
             .ToList();
     
         return subjects; 
+    }
+    
+    public async Task<IEnumerable<StudentShortResponseDto>> GetStudentsByGroup(string groupName)
+    {
+        if (string.IsNullOrWhiteSpace(groupName))
+        {
+            return [];
+        }
+        
+        var students = await _studentRepository.GetByGroup(groupName);
+        
+        return students.Select(student => new StudentShortResponseDto
+        {
+            Id = student.Id,
+            FullName = student.FullName,
+            Group = student.Group,
+            YearOfEntry = student.YearOfEntry
+        });
     }
 }

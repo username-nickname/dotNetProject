@@ -9,6 +9,7 @@ public interface ISubjectRepository
     Task<bool> ExistsById(int id);
     Task<bool> ExistsByName(string name);
     Task<IEnumerable<Subject>> GetAll();
+    Task<IEnumerable<Teacher>> GetAssignedTeachers(int subjectId);
     Task<int> CountByDepartment(int departmentId);
     Task SaveChanges();
 }

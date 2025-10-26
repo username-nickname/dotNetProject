@@ -36,4 +36,13 @@ public class StudentController : ApiControllerBase
 
         return OkDataResponse(subjectDto);
     }
+
+    [HttpGet("by-group")]
+    [Authorize]
+    public async Task<IActionResult> GetStudentsByGroup([FromQuery] string groupName)
+    {
+        var students = await _studentService.GetStudentsByGroup(groupName);
+
+        return OkDataResponse(students);
+    }
 }
