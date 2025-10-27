@@ -16,4 +16,5 @@ public interface IGradeRepository
     Task<IEnumerable<Grade>> GetGradesByTeacher(int teacherId);
     Task<IEnumerable<Grade>> GetGradesByGroupAsync(string groupName);
     Task<IEnumerable<Grade>> GetGradesByDepartment(int departmentId);
+    IQueryable<Grade> GetAsQueryable();
 }

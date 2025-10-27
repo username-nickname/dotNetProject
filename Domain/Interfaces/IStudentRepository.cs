@@ -15,4 +15,5 @@ public interface IStudentRepository
     Task<bool> HasSubject(int studentId, int subjectId);
     Task<Student?> GetByIdWithSubjects(int studentId);
     Task<int> CountByDepartment(int departmentId);
+    IQueryable<Student> GetAsQueryable();
 }

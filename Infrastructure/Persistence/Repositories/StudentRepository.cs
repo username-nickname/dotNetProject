@@ -71,8 +71,6 @@ public class StudentRepository : IStudentRepository
 
         return student;
     }
-    
-    
 
     public async Task<int> CountByDepartment(int departmentId)
     {
@@ -81,5 +79,13 @@ public class StudentRepository : IStudentRepository
                 g.StudentId == s.Id &&
                 g.Teacher.DepartmentId == departmentId))
             .CountAsync();
+    }
+
+    public IQueryable<Student> GetAsQueryable()
+    {
+        return _context.Students
+            .Include(s => s.Subjects)
+            .ThenInclude(ss => ss.Subject)
+            .AsQueryable();
     }
 }

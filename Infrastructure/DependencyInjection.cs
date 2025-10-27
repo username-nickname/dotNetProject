@@ -1,3 +1,4 @@
+using Application.DTO.Student.Query;
 using Domain.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
@@ -6,6 +7,8 @@ using Application.Interfaces;
 using Application.Interfaces.Services;
 using Application.Logic.Converters;
 using Application.Services;
+using Application.Validation.Student;
+using FluentValidation;
 using Infrastructure.Seeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,6 +46,7 @@ public static class DependencyInjection
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGradeConverter, GradeConverter>();
         services.AddScoped<DataSeeder>();
+        services.AddScoped<IValidator<StudentFilterDto>, StudentFilterDtoValidator>();
 
         return services;
     }

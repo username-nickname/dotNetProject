@@ -99,6 +99,11 @@ public class GradeRepository : IGradeRepository
             .ToListAsync();
     }
 
+    public IQueryable<Grade> GetAsQueryable()
+    {
+        return _context.Grades.AsQueryable();
+    }
+
     public async Task SaveChangesAsync()
     {
         await _context.SaveChangesAsync();

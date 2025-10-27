@@ -1,9 +1,12 @@
 using Application.DTO.Student;
+using Application.DTO.Student.Query;
 using Application.DTO.Subject;
 using Application.Interfaces.Services;
+using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Interfaces;
 using FluentValidation;
+
 
 namespace Application.Services;
 
@@ -11,17 +14,23 @@ public class StudentService : IStudentService
 {
     private readonly IValidator<AssignSubjectStudentDto> _assignSubjectValidator;
     private readonly IStudentRepository _studentRepository;
-    private readonly ISubjectRepository _subjectRepository;
+    private readonly IGradeRepository _gradeRepository;
+    private readonly ISubjectRepository _subjectRepository; // TODO: ?
+    private readonly IValidator<StudentFilterDto> _validator;
 
     public StudentService(
         IValidator<AssignSubjectStudentDto> assignSubjectValidator,
         IStudentRepository studentRepository, 
-        ISubjectRepository subjectRepository
+        ISubjectRepository subjectRepository,
+        IGradeRepository gradeRepository,
+        IValidator<StudentFilterDto> validator
         )
     {
         _studentRepository = studentRepository;
         _subjectRepository = subjectRepository;
         _assignSubjectValidator = assignSubjectValidator;
+        _gradeRepository = gradeRepository;
+        _validator = validator;
     }
     
     public async Task AssignSubject(AssignSubjectStudentDto dto)
@@ -69,5 +78,44 @@ public class StudentService : IStudentService
             Group = student.Group,
             YearOfEntry = student.YearOfEntry
         });
+    }
+
+    public async Task<IEnumerable<StudentDto>> GetFilteredStudents(StudentFilterDto filter)
+    {
+        await _validator.ValidateAndThrowAsync(filter);
+
+        var studentQuery = _studentRepository.GetAsQueryable();
+        var gradeQuery = _gradeRepository.GetAsQueryable();
+
+        
+        if (!string.IsNullOrWhiteSpace(filter.Group))
+        {
+            studentQuery = studentQuery.Where(s => s.Group == filter.Group);
+        }
+
+        if (filter.Semester.HasValue)
+        {
+            studentQuery = studentQuery.Where(s => 
+                s.Subjects.Any(ss => ss.Subject.Semester == filter.Semester.Value));
+        }
+
+        var projectedQuery = studentQuery
+            .Select(s => new StudentDto
+            {
+                Id = s.Id,
+                FullName = s.FullName,
+                Group = s.Group,
+                AverageGrade = gradeQuery
+                    .Where(g => g.StudentId == s.Id)
+                    .Average(g => (double?)g.NumericValue) ?? 0 
+            });
+
+        if (filter.MinAverageGrade.HasValue)
+        {
+            projectedQuery = projectedQuery.Where(dto => 
+                dto.AverageGrade >= filter.MinAverageGrade.Value);
+        }
+
+        return projectedQuery.ToList();
     }
 }

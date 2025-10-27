@@ -1,3 +1,4 @@
+using Application.DTO.Student.Query;
 using Domain.Enums;
 using Infrastructure.Security.Attributes;
 
@@ -44,5 +45,14 @@ public class StudentController : ApiControllerBase
         var students = await _studentService.GetStudentsByGroup(groupName);
 
         return OkDataResponse(students);
+    }
+
+    [HttpGet("filter")]
+    public async Task<IActionResult> FilterStudents(
+        [FromQuery] StudentFilterDto filter)
+    {
+        var students = await _studentService.GetFilteredStudents(filter);
+
+        return OkDataResponse(students, "Filtered students");
     }
 }
