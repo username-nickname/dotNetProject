@@ -2,103 +2,86 @@
   {
     "Id": 1,
     "RoleId": 3,
-    "Email": "admin@test.com",
-    "Password": "password"
+    "Email": "admin@test.com"
   },
   {
     "Id": 2,
     "RoleId": 2,
-    "Email": "ivan.petrenko@test.com",
-    "Password": "password"
+    "Email": "ivan.petrenko@test.com"
   },
   {
     "Id": 3,
     "RoleId": 2,
-    "Email": "maria.kovalenko@test.com",
-    "Password": "password"
+    "Email": "maria.kovalenko@test.com"
   },
   {
     "Id": 4,
     "RoleId": 1,
-    "Email": "olena.v@test.com",
-    "Password": "password"
+    "Email": "olena.v@test.com"
   },
   {
     "Id": 5,
     "RoleId": 1,
-    "Email": "mykhailo.i@test.com",
-    "Password": "password"
+    "Email": "mykhailo.i@test.com"
   },
   {
     "Id": 6,
     "RoleId": 1,
-    "Email": "andriy.koval@test.com",
-    "Password": "password"
+    "Email": "andriy.koval@test.com"
   },
   {
     "Id": 7,
     "RoleId": 1,
-    "Email": "iryna.moskalenko@test.com",
-    "Password": "password"
+    "Email": "iryna.moskalenko@test.com"
   },
   {
     "Id": 8,
     "RoleId": 1,
-    "Email": "oleh.khmelyuk@test.com",
-    "Password": "password"
+    "Email": "oleh.khmelyuk@test.com"
   },
   {
     "Id": 9,
     "RoleId": 1,
-    "Email": "nadiia.savchuk@test.com",
-    "Password": "password"
+    "Email": "nadiia.savchuk@test.com"
   },
   {
     "Id": 10,
     "RoleId": 1,
-    "Email": "vasyl.bondarenko@test.com",
-    "Password": "password"
+    "Email": "vasyl.bondarenko@test.com"
   },
   {
     "Id": 11,
     "RoleId": 1,
-    "Email": "sofia.kuznetsova@test.com",
-    "Password": "password"
+    "Email": "sofia.kuznetsova@test.com"
   },
   {
     "Id": 12,
     "RoleId": 1,
-    "Email": "dmytro.tarasenko@test.com",
-    "Password": "password"
+    "Email": "dmytro.tarasenko@test.com"
   },
   {
     "Id": 13,
     "RoleId": 1,
-    "Email": "yulia.romanenko@test.com",
-    "Password": "password"
+    "Email": "yulia.romanenko@test.com"
   },
   {
     "Id": 14,
     "RoleId": 2,
-    "Email": "prof..anna.shevchenko@test.com",
-    "Password": "password"
+    "Email": "prof..anna.shevchenko@test.com"
   },
   {
     "Id": 15,
     "RoleId": 2,
-    "Email": "assoc..prof..petro.lysenko@test.com",
-    "Password": "password"
+    "Email": "assoc..prof..petro.lysenko@test.com"
   },
   {
     "Id": 16,
     "RoleId": 2,
-    "Email": "lect..kateryna.bondar@test.com",
-    "Password": "password"
+    "Email": "lect..kateryna.bondar@test.com"
   },
   {
     "Id": 17,
     "RoleId": 2,
-    "Email": "dr..sergii.hrytsenko@test.com",
-    "Password": "password"
+    "Email": "dr..sergii.hrytsenko@test.com"
   }
 ]

@@ -67,6 +67,11 @@ public class ApiExceptionFilter : ExceptionFilterAttribute
                 message = exception.Message;
                 break;
             
+            case ExternalAuthException ex:
+                statusCode = ex.StatusCode;
+                message = ex.Message;
+                break;
+            
             default:
                 statusCode = StatusCodes.Status500InternalServerError;
                 message = "Непередбачена помилка сервера.";

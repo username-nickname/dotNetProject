@@ -4,11 +4,13 @@ using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
 using Infrastructure.Security;
 using Application.Interfaces;
+using Application.Interfaces.External;
 using Application.Interfaces.Services;
 using Application.Logic.Converters;
 using Application.Services;
 using Application.Validation.Student;
 using FluentValidation;
+using Infrastructure.Security.External;
 using Infrastructure.Seeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +36,6 @@ public static class DependencyInjection
         
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<IGradeService, GradeService>();
@@ -42,11 +43,10 @@ public static class DependencyInjection
         services.AddScoped<ITeacherService, TeacherService>();
         services.AddScoped<IReportService, ReportService>();
         
-        services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGradeConverter, GradeConverter>();
+        services.AddHttpClient<IExternalAuthApi, ExternalAuthApi>();
         services.AddScoped<DataSeeder>();
-        services.AddScoped<IValidator<StudentFilterDto>, StudentFilterDtoValidator>();
 
         return services;
     }

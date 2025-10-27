@@ -6,8 +6,8 @@ using Interfaces;
 public class User : IAuditableEntity
 {
     public int Id { get; private set; }
+    public string ExternalId { get; private set; }
     public string Email { get; private set; }
-    public string PasswordHash { get; private set; }
     public int TokenVersion { get; private set; } = 1;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
@@ -17,24 +17,17 @@ public class User : IAuditableEntity
     
     private User() { } 
     
-    public static User CreateNew(string email, string passwordHash, RoleType role)
+    public static User CreateNew(string email, string externalId, RoleType role)
     {
         ValidateRequiredString(email, nameof(email));
-        ValidateRequiredString(passwordHash, nameof(passwordHash));
+        ValidateRequiredString(externalId, nameof(externalId));
         
         return new User
         {
             Email = email,
-            PasswordHash = passwordHash,
+            ExternalId = externalId,
             RoleId = (int)role
         };
-    }
-    
-    public void ChangePassword(string newPasswordHash)
-    {
-        ValidateRequiredString(newPasswordHash, nameof(newPasswordHash));
-    
-        PasswordHash = newPasswordHash;
     }
     
     public bool HasRole(RoleType requiredRole)

@@ -38,8 +38,7 @@ public class AppDbContext : DbContext
             
             entity.HasKey(u => u.Id);
             entity.Property(u => u.Email).IsRequired().HasMaxLength(100);
-            // будет еще поле ID - для ID юзера,который присвоен ему в АПИ проекте регистрации
-            entity.Property(u => u.PasswordHash).IsRequired();
+            entity.Property(u => u.ExternalId).IsRequired();
             entity.Property(u => u.TokenVersion).IsRequired();
             entity.Property(u => u.CreatedAt).IsRequired();
             entity.Property(u => u.UpdatedAt).IsRequired();

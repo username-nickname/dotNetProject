@@ -1,5 +1,4 @@
 using Microsoft.OpenApi.Models;
-using Application.Validation.User;
 using Application.Validation.Auth;
 using Application.Validation.Report;
 using FluentValidation;
@@ -45,7 +44,6 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginUserDtoValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<ChangePasswordDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<AssignSubjectStudentDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<AddGradeDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateGradeDtoValidator>();
@@ -57,6 +55,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<AddSubjectDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateSubjectDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<AssignSubjectTeacherDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UnassignSubjectTeacherDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<StudentFilterDtoValidator>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 

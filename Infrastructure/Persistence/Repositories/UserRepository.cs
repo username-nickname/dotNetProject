@@ -23,6 +23,14 @@ public class UserRepository : IUserRepository
         return await _context.Users.FindAsync(id);
     }
 
+    public async Task<User?> GetByExternalId(string id)
+    {
+        return await _context.Users
+            .Where(t => t.ExternalId == id)
+            .Include(u => u.Role)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<User?> GetByEmail(string email)
     {
         return await _context.Users

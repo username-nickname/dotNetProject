@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using Application.Interfaces;
 using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
@@ -12,15 +11,12 @@ namespace Infrastructure.Seeding;
 public class DataSeeder
 {
     private readonly AppDbContext _context;
-    private readonly IPasswordHasher _passwordHasher;
     private readonly ILogger<DataSeeder> _logger;
     private readonly string _seedDataPath;
 
-    public DataSeeder(AppDbContext context, IPasswordHasher passwordHasher,
-        ILogger<DataSeeder> logger)
+    public DataSeeder(AppDbContext context, ILogger<DataSeeder> logger)
     {
         _context = context;
-        _passwordHasher = passwordHasher;
         _logger = logger;
 
         var baseDir = AppContext.BaseDirectory;
@@ -152,8 +148,7 @@ public class DataSeeder
         var entities = new List<User>();
         foreach (var dto in dtos)
         {
-            var passwordHash = _passwordHasher.HashPassword(dto.Password);
-            var entity = User.CreateNew(dto.Email, passwordHash,
+            var entity = User.CreateNew(dto.Email, Guid.NewGuid().ToString(),
                 (RoleType)dto.RoleId);
 
             SetPrivateProperty(entity, "Id", dto.Id); 
