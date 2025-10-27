@@ -28,12 +28,7 @@ public class SubjectService : ISubjectService
     
     public async Task AddSubject(AddSubjectDto dto)
     {
-        var validationResult = await _addSubjectValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _addSubjectValidator.ValidateAndThrowAsync(dto);
 
         var subject = Subject.CreateNew(dto.Name, dto.Semester, dto.Credits);
         
@@ -42,12 +37,7 @@ public class SubjectService : ISubjectService
 
     public async Task UpdateSubject(UpdateSubjectDto dto, int subjectId)
     {
-        var validationResult = await _updateSubjectValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _updateSubjectValidator.ValidateAndThrowAsync(dto);
 
         var subject = await _subjectRepository.GetById(subjectId);
 

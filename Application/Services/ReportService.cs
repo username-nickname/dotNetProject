@@ -106,13 +106,7 @@ public class ReportService : IReportService
 
     public async Task<GroupReportDto> GetGroupReport(GetGroupReportQueryDto dto)
     {
-        var validationResult =
-            await _getGroupReportQueryValidator.ValidateAsync(dto);
-
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors);
-        }
+        await _getGroupReportQueryValidator.ValidateAndThrowAsync(dto);
 
         var students = await _studentRepository.GetByGroup(dto.GroupName);
         var result = new GroupReportDto
@@ -196,13 +190,7 @@ public class ReportService : IReportService
     public async Task<GroupStatisticsDto> GetGroupStatistics(
         GetGroupStatisticsQueryDto dto)
     {
-        var validationResult =
-            await _getGroupStatisticsQueryValidator.ValidateAsync(dto);
-
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors);
-        }
+        await _getGroupStatisticsQueryValidator.ValidateAndThrowAsync(dto);
 
         var grades =
             await _gradeRepository.GetGradesByGroupAndSemester(dto.GroupName,

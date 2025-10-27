@@ -47,12 +47,7 @@ public class UserService : IUserService
         var user = await _userRepository.GetById(userId);
         if (user == null) throw new UserNotFoundException();
 
-        var validationResult = _changePasswordValidator.Validate(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        _changePasswordValidator.ValidateAndThrow(dto);
 
         await PerformPasswordChecks(dto, user.PasswordHash); // VerifyPassword времязатратная функция, лучше сдать асинхронно
         

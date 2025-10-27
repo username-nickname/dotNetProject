@@ -1,13 +1,12 @@
 using Application.DTO.Student.Query;
 using Domain.Enums;
 using Infrastructure.Security.Attributes;
-
-namespace Project.Api.Controllers;
-
 using Application.DTO.Student;
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
+
+namespace Project.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -38,16 +37,8 @@ public class StudentController : ApiControllerBase
         return OkDataResponse(subjectDto);
     }
 
-    [HttpGet("by-group")]
-    [Authorize]
-    public async Task<IActionResult> GetStudentsByGroup([FromQuery] string groupName)
-    {
-        var students = await _studentService.GetStudentsByGroup(groupName);
-
-        return OkDataResponse(students);
-    }
-
     [HttpGet("filter")]
+    [Authorize]
     public async Task<IActionResult> FilterStudents(
         [FromQuery] StudentFilterDto filter)
     {

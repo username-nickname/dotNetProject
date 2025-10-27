@@ -11,7 +11,7 @@ public class GetGroupStatisticsQueryDtoValidator : AbstractValidator<GetGroupSta
     {
         RuleFor(x => x.GroupName)
             .NotEmpty().WithMessage("Група обов'язкова.")
-            .MaximumLength(100)
+            .MaximumLength(100).WithMessage("Група має містити не більше 100 символів")
             .MustAsync(async (group, token) =>
             {
                 return await studentRepository.GroupExistsByName(group);

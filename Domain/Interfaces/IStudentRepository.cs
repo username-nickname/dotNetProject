@@ -6,7 +6,6 @@ public interface IStudentRepository
 {
     Task Add(Student student);
     Task<Student?> GetById(int id);
-    // TODO: ПРоверить ,используется ли где-то этот метод 
     Task<Student?> GetStudentWithDetails(int id);
     Task<IEnumerable<Student>> GetByGroup(string groupName);
     Task SaveChangesAsync();

@@ -26,12 +26,7 @@ public class TeacherService : ITeacherService
     
     public async Task AssignSubject(AssignSubjectTeacherDto dto)
     {
-        var validationResult = await _assignSubjectTeacherValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _assignSubjectTeacherValidator.ValidateAndThrowAsync(dto);
         
         var teacher = await _teacherRepository.GetByIdWithSubjects(dto.TeacherId);
         if (teacher == null) throw new UserNotFoundException($"Teacher with ID {dto.TeacherId} not found");
@@ -43,12 +38,7 @@ public class TeacherService : ITeacherService
 
     public async Task UnassignSubject(UnassignSubjectTeacherDto dto)
     {
-        var validationResult = await _unassignSubjectTeacherValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _unassignSubjectTeacherValidator.ValidateAndThrowAsync(dto);
         
         var teacher = await _teacherRepository.GetByIdWithSubjects(dto.TeacherId);
         if (teacher == null) throw new UserNotFoundException($"Teacher with ID {dto.TeacherId} not found");

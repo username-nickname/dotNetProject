@@ -7,6 +7,16 @@ public class StudentFilterDtoValidator : AbstractValidator<StudentFilterDto>
 {
     public StudentFilterDtoValidator()
     {
+        RuleFor(x => x.Name)
+            .MinimumLength(3).WithMessage("Name повинен містити від 3 до 50 символів")
+            .MaximumLength(50).WithMessage("Name повинен містити не більше 50 символів")
+            .When(x => x.Name != null);
+        
+        RuleFor(x => x.Group)
+            .MaximumLength(100).WithMessage("Група має містити не більше 100 символів")
+            .MaximumLength(50).WithMessage("Name повинен містити не більше 50 символів")
+            .When(x => x.Group != null);
+        
         RuleFor(x => x.Semester)
             .InclusiveBetween(1, 8)
             .When(x => x.Semester.HasValue)

@@ -1,10 +1,9 @@
 using Domain.Enums;
-
-namespace Application.Validation.Auth;
-
 using FluentValidation;
 using Domain.Interfaces;
-using DTO.Auth;
+using Application.DTO.Auth;
+
+namespace Application.Validation.Auth;
 
 public class RegisterUserDtoValidator : AbstractValidator<RegisterUserDto>
 {
@@ -27,8 +26,8 @@ public class RegisterUserDtoValidator : AbstractValidator<RegisterUserDto>
 
         RuleFor(x => x.FullName)
             .NotEmpty().WithMessage("FullName обов'язковий")
-            .MinimumLength(10).WithMessage("FullName повинен містити від 3 до 50 символів")
-            .MaximumLength(100).WithMessage("FullName повинен містити від 6 до 50 символів");
+            .MinimumLength(10).WithMessage("FullName повинен містити від 10 до 100 символів")
+            .MaximumLength(100).WithMessage("FullName повинен містити не більше 100 символів");
         
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password обов'язковий")

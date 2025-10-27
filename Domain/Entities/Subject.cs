@@ -22,7 +22,6 @@ public class Subject : IAuditableEntity
 
     public Subject(int id, string name, int semester, int credits)
     {
-        // TODO: Возможно при сдаче проекта удалить этот конструтор. Используется только в DbContext и сидере. 
         Id = id;
         Name = name;
         Semester = semester;

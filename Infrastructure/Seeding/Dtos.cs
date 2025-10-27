@@ -1,7 +1,5 @@
 ﻿namespace Infrastructure.Seeding;
 
-// TODO: МОЖЛИВО це все треба розкидати по різним файлам, подумаю про це пізніше :)
-
 public class UserSeedDto
 {
     public int Id { get; set; }

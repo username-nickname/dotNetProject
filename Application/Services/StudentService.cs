@@ -2,11 +2,9 @@ using Application.DTO.Student;
 using Application.DTO.Student.Query;
 using Application.DTO.Subject;
 using Application.Interfaces.Services;
-using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Interfaces;
 using FluentValidation;
-
 
 namespace Application.Services;
 
@@ -15,32 +13,24 @@ public class StudentService : IStudentService
     private readonly IValidator<AssignSubjectStudentDto> _assignSubjectValidator;
     private readonly IStudentRepository _studentRepository;
     private readonly IGradeRepository _gradeRepository;
-    private readonly ISubjectRepository _subjectRepository; // TODO: ?
-    private readonly IValidator<StudentFilterDto> _validator;
+    private readonly IValidator<StudentFilterDto> _studentFilterValidator;
 
     public StudentService(
         IValidator<AssignSubjectStudentDto> assignSubjectValidator,
         IStudentRepository studentRepository, 
-        ISubjectRepository subjectRepository,
         IGradeRepository gradeRepository,
-        IValidator<StudentFilterDto> validator
+        IValidator<StudentFilterDto> studentFilterValidator
         )
     {
         _studentRepository = studentRepository;
-        _subjectRepository = subjectRepository;
         _assignSubjectValidator = assignSubjectValidator;
         _gradeRepository = gradeRepository;
-        _validator = validator;
+        _studentFilterValidator = studentFilterValidator;
     }
     
     public async Task AssignSubject(AssignSubjectStudentDto dto)
     {
-        var validationResult = await _assignSubjectValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _assignSubjectValidator.ValidateAndThrowAsync(dto);
         
         var student = await _studentRepository.GetById(dto.StudentId);
         if (student == null) throw new UserNotFoundException();
@@ -62,27 +52,9 @@ public class StudentService : IStudentService
         return subjects; 
     }
     
-    public async Task<IEnumerable<StudentShortResponseDto>> GetStudentsByGroup(string groupName)
-    {
-        if (string.IsNullOrWhiteSpace(groupName))
-        {
-            return [];
-        }
-        
-        var students = await _studentRepository.GetByGroup(groupName);
-        
-        return students.Select(student => new StudentShortResponseDto
-        {
-            Id = student.Id,
-            FullName = student.FullName,
-            Group = student.Group,
-            YearOfEntry = student.YearOfEntry
-        });
-    }
-
     public async Task<IEnumerable<StudentDto>> GetFilteredStudents(StudentFilterDto filter)
     {
-        await _validator.ValidateAndThrowAsync(filter);
+        await _studentFilterValidator.ValidateAndThrowAsync(filter);
 
         var studentQuery = _studentRepository.GetAsQueryable();
         var gradeQuery = _gradeRepository.GetAsQueryable();
@@ -99,6 +71,12 @@ public class StudentService : IStudentService
                 s.Subjects.Any(ss => ss.Subject.Semester == filter.Semester.Value));
         }
 
+        if (!string.IsNullOrWhiteSpace(filter.Name))
+        {
+            studentQuery = studentQuery.Where(s => 
+                s.FullName.ToLower().StartsWith(filter.Name.ToLower()));
+        }
+        
         var projectedQuery = studentQuery
             .Select(s => new StudentDto
             {

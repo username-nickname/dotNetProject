@@ -65,8 +65,25 @@ public class DataSeeder
         if (dtos == null) return;
 
         var entities = dtos.Select(dto => new Role(dto.Id, dto.Name));
-        await _context.Roles.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Roles] ON;");
+
+            await _context.Roles.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Roles] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Positions");
+            throw;
+        }
     }
 
     private async Task SeedPositionsAsync()
@@ -76,8 +93,25 @@ public class DataSeeder
         if (dtos == null) return;
 
         var entities = dtos.Select(dto => new Position(dto.Id, dto.Name));
-        await _context.Positions.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Positions] ON;");
+
+            await _context.Positions.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Positions] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Positions");
+            throw;
+        }
     }
 
     private async Task SeedSubjectsAsync()
@@ -88,8 +122,25 @@ public class DataSeeder
 
         var entities = dtos.Select(dto =>
             new Subject(dto.Id, dto.Name, dto.Semester, dto.Credits));
-        await _context.Subjects.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Subjects] ON;");
+
+            await _context.Subjects.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Subjects] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Subjects");
+            throw;
+        }
     }
 
     private async Task SeedUsersAsync()
@@ -105,13 +156,29 @@ public class DataSeeder
             var entity = User.CreateNew(dto.Email, passwordHash,
                 (RoleType)dto.RoleId);
 
-            SetPrivateProperty(entity, "Id", dto.Id);
+            SetPrivateProperty(entity, "Id", dto.Id); 
 
             entities.Add(entity);
         }
 
-        await _context.Users.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Users] ON;");
+
+            await _context.Users.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Users] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Users");
+            throw;
+        }
     }
 
     private async Task SeedDepartmentsAsync()
@@ -123,8 +190,25 @@ public class DataSeeder
 
         var entities =
             dtos.Select(dto => new Department(dto.Id, dto.Name, null));
-        await _context.Departments.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Departments] ON;");
+
+            await _context.Departments.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Departments] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Departments");
+            throw;
+        }
     }
 
     private async Task SeedTeachersAsync()
@@ -142,9 +226,25 @@ public class DataSeeder
             entities.Add(entity);
         }
 
-        await _context.Teachers.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
-        _context.ChangeTracker.Clear();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Teachers] ON;");
+
+            await _context.Teachers.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Teachers] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Teachers");
+            throw;
+        }
     }
 
     private async Task SeedStudentsAsync()
@@ -162,8 +262,24 @@ public class DataSeeder
             entities.Add(entity);
         }
 
-        await _context.Students.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Students] ON;");
+
+            await _context.Students.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Students] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Students");
+            throw;
+        }
     }
 
     private async Task UpdateDepartmentHeadsAsync()
@@ -200,10 +316,8 @@ public class DataSeeder
         var dtos = await LoadJsonAsync<List<TeacherSubjectSeedDto>>("teachersubjects.json");
         if (dtos == null) return;
 
-        // 🔹 Очистимо ChangeTracker, щоб уникнути конфліктів
         _context.ChangeTracker.Clear();
 
-        // 🔹 Перевірка на дублікати
         var duplicates = dtos
             .GroupBy(d => new { d.TeacherId, d.SubjectId })
             .Where(g => g.Count() > 1)
@@ -219,7 +333,6 @@ public class DataSeeder
             }
         }
 
-        // 🔹 Усуваємо дублікати, щоб не впали при додаванні
         var entities = dtos
             .DistinctBy(dto => new { dto.TeacherId, dto.SubjectId })
             .Select(dto => new TeacherSubject(dto.TeacherId, dto.SubjectId));
@@ -244,7 +357,6 @@ public class DataSeeder
         await _context.Set<StudentSubject>().AddRangeAsync(entities);
         await _context.SaveChangesAsync();
     }
-
     private async Task SeedGradesAsync()
     {
         if (await _context.Grades.AnyAsync()) return;
@@ -262,8 +374,24 @@ public class DataSeeder
             entities.Add(entity);
         }
 
-        await _context.Grades.AddRangeAsync(entities);
-        await _context.SaveChangesAsync();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Grades] ON;");
+
+            await _context.Grades.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+            
+            await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Grades] OFF;");
+
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to seed Grades");
+            throw;
+        }
     }
 
     private async Task<T?> LoadJsonAsync<T>(string fileName) where T : class

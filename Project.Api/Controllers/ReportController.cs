@@ -19,7 +19,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("student/{studentId:int}/semester/{semester:int}")]
-    // [Authorize]
+    [Authorize]
     public async Task<IActionResult> GetStudentReport(int studentId,
         int semester)
     {
@@ -31,7 +31,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("student/{studentId:int}/final")]
-    // [Authorize]
+    [Authorize]
     public async Task<IActionResult> GetFinalStudentReport(int studentId)
     {
         var report = await _reportService.GetFinalReport(studentId);
@@ -41,7 +41,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("group/")]
-    // [Authorize]
+    [Authorize]
     public async Task<IActionResult> GetGroupReport(
         [FromQuery] GetGroupReportQueryDto dto)
     {
@@ -51,7 +51,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("group/statistics")]
-    // [Authorize]
+    [Authorize]
     public async Task<IActionResult> GetGroupStatistics([FromQuery] GetGroupStatisticsQueryDto dto)
     {
         var stats =
@@ -61,7 +61,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("teacher/{teacherId:int}/average")]
-    // [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetTeacherSubjectAverages(int teacherId)
     {
         var report = await _reportService.GetTeacherSubjectAverages(teacherId);
@@ -70,7 +70,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("teacher/{teacherId:int}/semester-count")]
-    // [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
+    [RoleAuthorize(RoleType.Teacher, RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetTeacherSemesterGradeCounts(
         int teacherId)
     {
@@ -81,7 +81,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("department/{departmentId:int}")]
-    // [RoleAuthorize(RoleType.HeadOfDepartment)]
+    [RoleAuthorize(RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetDepartmentReport(int departmentId)
     {
         var report = await _reportService.GetDepartmentReport(departmentId);
@@ -90,7 +90,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("department/{departmentId:int}/statistics")]
-    // [RoleAuthorize(RoleType.HeadOfDepartment)]
+    [RoleAuthorize(RoleType.HeadOfDepartment)]
     public async Task<IActionResult> GetDepartmentStatistics(int departmentId)
     {
         var stats = await _reportService.GetDepartmentStatistics(departmentId);
@@ -98,7 +98,7 @@ public class ReportController : ApiControllerBase
     }
 
     [HttpGet("group/rating")]
-    // [Authorize]
+    [Authorize]
     public async Task<IActionResult> GetGroupRating([FromQuery] string groupName)
     {
         var report = await _reportService.GetGroupRating(groupName);

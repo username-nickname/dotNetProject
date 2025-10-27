@@ -1,6 +1,6 @@
-namespace Application.Interfaces.Services;
+using Application.DTO.User;
 
-using DTO.User;
+namespace Application.Interfaces.Services;
 
 public interface IUserService
 {

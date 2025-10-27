@@ -46,12 +46,7 @@ public class AuthService : IAuthService
     
     public async Task<bool> Register(RegisterUserDto dto)
     {
-        var validationResult = await _registerValidator.ValidateAsync(dto);
-
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _registerValidator.ValidateAndThrowAsync(dto);
         
         string passwordHash = _passwordHasher.HashPassword(dto.Password);
         Enum.TryParse(dto.RoleName, ignoreCase: true, out RoleType role);
@@ -89,12 +84,7 @@ public class AuthService : IAuthService
 
     public async Task<string?> Login(LoginUserDto dto)
     {
-        var validationResult = _loginValidator.Validate(dto);
-
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        _loginValidator.ValidateAndThrow(dto);
 
         var user = await _userRepository.GetByEmail(dto.Email);
 

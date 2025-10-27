@@ -44,12 +44,7 @@ public class GradeService : IGradeService
     
     public async Task AddGrade(AddGradeDto dto, int userId)
     {
-        var validationResult = await _addGradeValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _addGradeValidator.ValidateAndThrowAsync(dto);
 
         var teacher = await _teacherRepository.GetByUserId(userId);
         
@@ -70,12 +65,7 @@ public class GradeService : IGradeService
 
     public async Task UpdateGrade(UpdateGradeDto dto, int userId)
     {
-        var validationResult = await _updateGradeValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _updateGradeValidator.ValidateAndThrowAsync(dto);
         
         var grade = await _gradeRepository.GetById(dto.GradeId);
         
@@ -102,12 +92,7 @@ public class GradeService : IGradeService
 
     public async Task<List<GradeResponseDto>> GetGradesForSubject(GetGradesQueryDto queryDto)
     {
-        var validationResult = await _getGradeValidator.ValidateAsync(queryDto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _getGradeValidator.ValidateAndThrowAsync(queryDto);
         
         var grades = await _gradeRepository.GetGradesByStudentAndSubject(queryDto.StudentId, queryDto.SubjectId);
         
@@ -116,19 +101,14 @@ public class GradeService : IGradeService
 
     public async Task<StudentGpaResponseDto> CalculateStudentGpa(CalculateStudentGpaQueryDto dto)
     {
-        var validationResult = await _calculateStudentGpaQueryValidator.ValidateAsync(dto);
-        
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors); 
-        }
+        await _calculateStudentGpaQueryValidator.ValidateAndThrowAsync(dto);
         
         var student = await _studentRepository.GetById(dto.StudentId);
         if (student == null) throw new UserNotFoundException();
 
         var allGrades = await _gradeRepository.GetGradesByStudentAndSemester(dto.StudentId, dto.Semester);
     
-        if (allGrades == null || !allGrades.Any())
+        if (!allGrades.Any())
         {
             return new StudentGpaResponseDto(dto.StudentId, 0.0m, new List<SubjectGpaDto>());
         }
